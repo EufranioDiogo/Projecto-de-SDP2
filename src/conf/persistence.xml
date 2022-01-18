@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="BilheteIdentidadePU" transaction-type="JTA">
+  <persistence-unit name="UCANCONTEXTPU" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>ejbs.entities.Provincia</class>
     <class>ejbs.entities.BilheteIdentidade</class>
     <class>ejbs.entities.Localidade</class>
+    <class>ejbs.entities.Conta</class>
+    <class>ejbs.entities.Veiculo</class>
+    <class>ejbs.entities.TipoConta</class>
+    <class>ejbs.entities.Pessoa</class>
+    <class>ejbs.entities.Montra</class>
+    <class>ejbs.entities.Endereco</class>
+    <class>ejbs.entities.Portfolio</class>
+    <class>ejbs.entities.CompraVeiculo</class>
+    <class>ejbs.entities.Sexo</class>
+    <class>ejbs.entities.Stock</class>
+    <class>ejbs.entities.TipoVeiculo</class>
+    <class>ejbs.entities.Compra</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <jta-data-source>java:/BilheteIdentidadeDS</jta-data-source>
+    <jta-data-source>java:/UCANCONTEXTDS</jta-data-source>
   </persistence-unit>
 </persistence>

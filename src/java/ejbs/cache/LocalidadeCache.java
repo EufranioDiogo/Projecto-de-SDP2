@@ -88,7 +88,7 @@ public class LocalidadeCache implements Serializable
         Localidade pai;
         for (Localidade l : this.localidadeLista)
         {
-            pai = l.getFkLocalidadePai();
+            pai = l.getFkLocalidade();
             if (pai == null)
             {
                 continue;
@@ -101,7 +101,7 @@ public class LocalidadeCache implements Serializable
 
         if (localidadeFilhos.size() > 1)
         {
-            Collections.sort(localidadeFilhos, Comparator.comparing(Localidade::getNome));
+            Collections.sort(localidadeFilhos, Comparator.comparing(Localidade::getDesignacao));
         }
 
         return localidadeFilhos;
@@ -116,11 +116,11 @@ public class LocalidadeCache implements Serializable
     {
         for (Localidade l : this.localidadeLista)
         {
-            if (l.getFkLocalidadePai() != null)
+            if (l.getFkLocalidade() != null)
             {
                 continue;
             }
-            if (l.getNome().equalsIgnoreCase(nome))
+            if (l.getDesignacao().equalsIgnoreCase(nome))
             {
                 return l;
             }
@@ -142,7 +142,7 @@ public class LocalidadeCache implements Serializable
         this.paisLista = new ArrayList<>();
         for (Localidade l : this.localidadeLista)
         {
-            if (l.getFkLocalidadePai() != null)
+            if (l.getFkLocalidade() != null)
             {
                 continue;
             }
@@ -153,7 +153,7 @@ public class LocalidadeCache implements Serializable
             
             if (paisLista.size() > 1)
             {
-                Collections.sort(paisLista, Comparator.comparing(Localidade::getNome));
+                Collections.sort(paisLista, Comparator.comparing(Localidade::getDesignacao));
             }
         }
     }

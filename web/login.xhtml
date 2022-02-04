@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Login Page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panel>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Username"/>
+                    <p:inputText id="username-input"/>
+                    <p:outputLabel value="Password"/>
+                    <p:inputMask id="password-input" mask="" />
+                    <p:button value="Login" outcome="home.xhtml"/>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+        <h:link outcome="index.xhtml" value="Home"> </h:link>
+        <h:link outcome="signup.xhtml" value="Não possui uma conta? Cadastre-se!"> </h:link>
+    </h:body>
+</html>
+

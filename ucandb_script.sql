@@ -1,7 +1,7 @@
 CREATE TABLE localidade(
-  pk_localidade VARCHAR(250) NOT NULL PRIMARY KEY,
+  pk_localidade INTEGER NOT NULL PRIMARY KEY,
   designacao VARCHAR(200) NOT NULL,
-  fk_localidade INTEGER NOT NULL
+  fk_localidade INTEGER NOT NULL REFERENCES localidade(pk_localidade) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE sexo(
@@ -32,7 +32,7 @@ CREATE TABLE pessoa(
   pk_pessoa SERIAL NOT NULL PRIMARY KEY,
   nome VARCHAR(200) NOT NULL,
   data_nasc DATE NOT NULL,
-  fk_sexo INTEGER NOT NULL REFERENCES sexo(pk_sexo) ON DELETE CASCADE ON UPDATE CASCADE,
+  fk_sexo INTEGER NOT NULL REFERENCES sexo(pk_sexo) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE endereco(
@@ -40,8 +40,8 @@ CREATE TABLE endereco(
   numero_casa VARCHAR,
   rua VARCHAR(200),
   fk_pessoa INTEGER NOT NULL REFERENCES pessoa(pk_pessoa) ON UPDATE CASCADE ON DELETE CASCADE,
-  fk_localidade VARCHAR(250) NOT NULL REFERENCES localidade(pk_localidade) ON UPDATE CASCADE ON DELETE CASCADE
-)
+  fk_localidade INTEGER NOT NULL REFERENCES localidade(pk_localidade) ON UPDATE CASCADE ON DELETE CASCADE
+);
 
 CREATE TABLE tipo_conta(
   pk_tipo_conta INTEGER NOT NULL PRIMARY KEY,
@@ -83,6 +83,7 @@ CREATE TABLE compra(
 );
 
 CREATE TABLE compra_veiculo(
+  pk_compra_veiculo SERIAL PRIMARY KEY,
   fk_portfolio VARCHAR(200) NOT NULL REFERENCES portfolio(pk_portfolio) ON DELETE CASCADE ON UPDATE CASCADE,
   valor_compra NUMERIC NOT NULL CHECK (valor_compra > 0),
   quantidade_comprada INTEGER NOT NULL CHECK (quantidade_comprada > 0),

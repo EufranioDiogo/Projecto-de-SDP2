@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="UCANCONTEXTPU" transaction-type="JTA">
+  <persistence-unit name="UcanPU" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>ejbs.entities.Provincia</class>
     <class>ejbs.entities.BilheteIdentidade</class>
@@ -18,6 +18,6 @@
     <class>ejbs.entities.TipoVeiculo</class>
     <class>ejbs.entities.Compra</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <jta-data-source>java:/UCANCONTEXTDS</jta-data-source>
+    <jta-data-source>java:/UcanDS</jta-data-source>
   </persistence-unit>
 </persistence>

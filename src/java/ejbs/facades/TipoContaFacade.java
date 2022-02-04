@@ -5,7 +5,7 @@
  */
 package ejbs.facades;
 
-import ejbs.entities.Localidade;
+import ejbs.entities.TipoConta;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author ed
  */
 @Stateless
-public class LocalidadeFacade extends AbstractFacade<Localidade> {
+public class TipoContaFacade extends AbstractFacade<TipoConta> {
 
     @PersistenceContext(unitName = "UcanPU")
     private EntityManager em;
@@ -25,16 +25,8 @@ public class LocalidadeFacade extends AbstractFacade<Localidade> {
         return em;
     }
 
-    public LocalidadeFacade() {
-        super(Localidade.class);
-    }
-
-    @Override
-    public String toString() {
-        return "LocalidadeFacade{" + "em=" + em + '}';
+    public TipoContaFacade() {
+        super(TipoConta.class);
     }
     
-    public String toString(Localidade localidade) {
-        return localidade.toString();
-    }
 }

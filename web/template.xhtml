@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <div id="top" class="top">
+                <ui:insert name="top">
+
+                    <p:menubar>
+                        <p:submenu label="Armazem">
+                            <p:menuitem 
+                                value="Entrada de productos" 
+                                action="armazem_entrada_novo?faces-redirect=true"
+                                />
+                            <p:menuitem 
+                                value="Consultar armazem"
+                                action="armazem_consultar?faces-redirect=true"
+
+                                />
+                            <p:menuitem 
+                                value="Definir preços"
+                                action="armazem_precos?faces-redirect=true"
+
+                                />
+                            <p:menuitem
+                                value="Productos ruptura"
+                                action="armazem_ruptura?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Productos quase ruptura"
+                                action="armazem_quase_ruptura?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Productos pre ruptura"
+                                action="armazem_pre_ruptura?faces-redirect=true"
+                                />
+                        </p:submenu>
+                        
+                        <p:submenu label="Montra">
+                            <p:menuitem
+                                value="Ver"
+                                action="montra_ver?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Adicionar"
+                                action="montra_adicionar?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Remover"
+                                action="montra_remover?faces-redirect=true"
+                                />
+                        </p:submenu>
+                        
+                        <p:submenu label="Compra">
+                            <p:menuitem
+                                value="Realizar"
+                                action="compra_realizar?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Ver Todas"
+                                action="compra_ver?faces-redirect=true"
+                                />
+                        </p:submenu>
+                        
+                        <p:submenu label="Conta">
+                            <p:menuitem
+                                value="Criar"
+                                action="conta_criar?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Editar"
+                                action="conta_editar?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Eliminar"
+                                action="conta_eliminar?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Ver contas"
+                                action="conta_ver?faces-redirect=true"
+                                />
+                        </p:submenu>
+                        
+                        <p:submenu label="Balancetes">
+                            <p:menuitem
+                                value="Diarios"
+                                action="balancetes_diarios?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Mensais"
+                                action="balancetes_mensais?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Intervalo de Tempo"
+                                action="balancetes_intervalo_tempo?faces-redirect=true"
+                                />
+                            <p:menuitem
+                                value="Tipo productos"
+                                action="balancetes_tipo_productos?faces-redirect=true"
+                                />
+                        </p:submenu>
+
+                    </p:menubar>
+                </ui:insert>
+            </div>
+
+            <div id="content" class="center_content">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </h:form>
+    </h:body>
+
+</html>

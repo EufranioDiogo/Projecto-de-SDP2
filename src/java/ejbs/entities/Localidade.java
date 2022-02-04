@@ -12,6 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,47 +33,45 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Localidade.findAll", query = "SELECT l FROM Localidade l"),
     @NamedQuery(name = "Localidade.findByPkLocalidade", query = "SELECT l FROM Localidade l WHERE l.pkLocalidade = :pkLocalidade"),
-    @NamedQuery(name = "Localidade.findByDesignacao", query = "SELECT l FROM Localidade l WHERE l.designacao = :designacao"),
-    @NamedQuery(name = "Localidade.findByFkLocalidade", query = "SELECT l FROM Localidade l WHERE l.fkLocalidade = :fkLocalidade")})
+    @NamedQuery(name = "Localidade.findByDesignacao", query = "SELECT l FROM Localidade l WHERE l.designacao = :designacao")})
 public class Localidade implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 250)
-    @Column(name = "pk_localidade", nullable = false, length = 250)
-    private String pkLocalidade;
+    @Column(name = "pk_localidade", nullable = false)
+    private Integer pkLocalidade;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
     @Column(nullable = false, length = 200)
     private String designacao;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "fk_localidade", nullable = false)
-    private int fkLocalidade;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkLocalidade")
     private List<Endereco> enderecoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkLocalidade")
+    private List<Localidade> localidadeList;
+    @JoinColumn(name = "fk_localidade", referencedColumnName = "pk_localidade", nullable = false)
+    @ManyToOne(optional = false)
+    private Localidade fkLocalidade;
 
     public Localidade() {
     }
 
-    public Localidade(String pkLocalidade) {
+    public Localidade(Integer pkLocalidade) {
         this.pkLocalidade = pkLocalidade;
     }
 
-    public Localidade(String pkLocalidade, String designacao, int fkLocalidade) {
+    public Localidade(Integer pkLocalidade, String designacao) {
         this.pkLocalidade = pkLocalidade;
         this.designacao = designacao;
-        this.fkLocalidade = fkLocalidade;
     }
 
-    public String getPkLocalidade() {
+    public Integer getPkLocalidade() {
         return pkLocalidade;
     }
 
-    public void setPkLocalidade(String pkLocalidade) {
+    public void setPkLocalidade(Integer pkLocalidade) {
         this.pkLocalidade = pkLocalidade;
     }
 
@@ -83,14 +83,6 @@ public class Localidade implements Serializable {
         this.designacao = designacao;
     }
 
-    public int getFkLocalidade() {
-        return fkLocalidade;
-    }
-
-    public void setFkLocalidade(int fkLocalidade) {
-        this.fkLocalidade = fkLocalidade;
-    }
-
     @XmlTransient
     public List<Endereco> getEnderecoList() {
         return enderecoList;
@@ -98,6 +90,23 @@ public class Localidade implements Serializable {
 
     public void setEnderecoList(List<Endereco> enderecoList) {
         this.enderecoList = enderecoList;
+    }
+
+    @XmlTransient
+    public List<Localidade> getLocalidadeList() {
+        return localidadeList;
+    }
+
+    public void setLocalidadeList(List<Localidade> localidadeList) {
+        this.localidadeList = localidadeList;
+    }
+
+    public Localidade getFkLocalidade() {
+        return fkLocalidade;
+    }
+
+    public void setFkLocalidade(Localidade fkLocalidade) {
+        this.fkLocalidade = fkLocalidade;
     }
 
     @Override

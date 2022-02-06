@@ -15,10 +15,10 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            120
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/home.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

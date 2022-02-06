@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ed
  */
 @Entity
-@Table(catalog = "ucandb", schema = "POSTGRES")
+@Table(catalog = "ucandb", schema = "public")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Portfolio.findAll", query = "SELECT p FROM Portfolio p"),
@@ -51,11 +51,11 @@ public class Portfolio implements Serializable {
     @Column(name = "fk_portfolio", length = 200)
     private String fkPortfolio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPortfolio")
-    private List<Veiculo> veiculoList;
+    private Collection<Veiculo> veiculoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPortfolio")
-    private List<CompraVeiculo> compraVeiculoList;
+    private Collection<CompraVeiculo> compraVeiculoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPortfolio")
-    private List<Stock> stockList;
+    private Collection<Stock> stockCollection;
 
     public Portfolio() {
     }
@@ -94,30 +94,30 @@ public class Portfolio implements Serializable {
     }
 
     @XmlTransient
-    public List<Veiculo> getVeiculoList() {
-        return veiculoList;
+    public Collection<Veiculo> getVeiculoCollection() {
+        return veiculoCollection;
     }
 
-    public void setVeiculoList(List<Veiculo> veiculoList) {
-        this.veiculoList = veiculoList;
-    }
-
-    @XmlTransient
-    public List<CompraVeiculo> getCompraVeiculoList() {
-        return compraVeiculoList;
-    }
-
-    public void setCompraVeiculoList(List<CompraVeiculo> compraVeiculoList) {
-        this.compraVeiculoList = compraVeiculoList;
+    public void setVeiculoCollection(Collection<Veiculo> veiculoCollection) {
+        this.veiculoCollection = veiculoCollection;
     }
 
     @XmlTransient
-    public List<Stock> getStockList() {
-        return stockList;
+    public Collection<CompraVeiculo> getCompraVeiculoCollection() {
+        return compraVeiculoCollection;
     }
 
-    public void setStockList(List<Stock> stockList) {
-        this.stockList = stockList;
+    public void setCompraVeiculoCollection(Collection<CompraVeiculo> compraVeiculoCollection) {
+        this.compraVeiculoCollection = compraVeiculoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Stock> getStockCollection() {
+        return stockCollection;
+    }
+
+    public void setStockCollection(Collection<Stock> stockCollection) {
+        this.stockCollection = stockCollection;
     }
 
     @Override

@@ -6,8 +6,8 @@
 package ejbs.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ed
  */
 @Entity
-@Table(catalog = "ucandb", schema = "POSTGRES")
+@Table(catalog = "ucandb", schema = "public")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
@@ -62,9 +62,9 @@ public class Pessoa implements Serializable {
     @ManyToOne(optional = false)
     private Sexo fkSexo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPessoa")
-    private List<Endereco> enderecoList;
+    private Collection<Endereco> enderecoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPessoa")
-    private List<Conta> contaList;
+    private Collection<Conta> contaCollection;
 
     public Pessoa() {
     }
@@ -112,21 +112,21 @@ public class Pessoa implements Serializable {
     }
 
     @XmlTransient
-    public List<Endereco> getEnderecoList() {
-        return enderecoList;
+    public Collection<Endereco> getEnderecoCollection() {
+        return enderecoCollection;
     }
 
-    public void setEnderecoList(List<Endereco> enderecoList) {
-        this.enderecoList = enderecoList;
+    public void setEnderecoCollection(Collection<Endereco> enderecoCollection) {
+        this.enderecoCollection = enderecoCollection;
     }
 
     @XmlTransient
-    public List<Conta> getContaList() {
-        return contaList;
+    public Collection<Conta> getContaCollection() {
+        return contaCollection;
     }
 
-    public void setContaList(List<Conta> contaList) {
-        this.contaList = contaList;
+    public void setContaCollection(Collection<Conta> contaCollection) {
+        this.contaCollection = contaCollection;
     }
 
     @Override

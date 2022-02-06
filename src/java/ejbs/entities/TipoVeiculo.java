@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ed
  */
 @Entity
-@Table(name = "tipo_veiculo", catalog = "ucandb", schema = "POSTGRES")
+@Table(name = "tipo_veiculo", catalog = "ucandb", schema = "public")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoVeiculo.findAll", query = "SELECT t FROM TipoVeiculo t"),
@@ -48,7 +48,7 @@ public class TipoVeiculo implements Serializable {
     @Column(nullable = false, length = 200)
     private String designacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkTipoVeiculo")
-    private List<Veiculo> veiculoList;
+    private Collection<Veiculo> veiculoCollection;
 
     public TipoVeiculo() {
     }
@@ -79,12 +79,12 @@ public class TipoVeiculo implements Serializable {
     }
 
     @XmlTransient
-    public List<Veiculo> getVeiculoList() {
-        return veiculoList;
+    public Collection<Veiculo> getVeiculoCollection() {
+        return veiculoCollection;
     }
 
-    public void setVeiculoList(List<Veiculo> veiculoList) {
-        this.veiculoList = veiculoList;
+    public void setVeiculoCollection(Collection<Veiculo> veiculoCollection) {
+        this.veiculoCollection = veiculoCollection;
     }
 
     @Override

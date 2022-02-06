@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ed
  */
 @Entity
-@Table(catalog = "ucandb", schema = "POSTGRES")
+@Table(catalog = "ucandb", schema = "public")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Veiculo.findAll", query = "SELECT v FROM Veiculo v"),
@@ -60,9 +60,9 @@ public class Veiculo implements Serializable {
     @ManyToOne(optional = false)
     private TipoVeiculo fkTipoVeiculo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculo")
-    private List<Compra> compraList;
+    private Collection<Compra> compraCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkProducto")
-    private List<Montra> montraList;
+    private Collection<Montra> montraCollection;
 
     public Veiculo() {
     }
@@ -117,21 +117,21 @@ public class Veiculo implements Serializable {
     }
 
     @XmlTransient
-    public List<Compra> getCompraList() {
-        return compraList;
+    public Collection<Compra> getCompraCollection() {
+        return compraCollection;
     }
 
-    public void setCompraList(List<Compra> compraList) {
-        this.compraList = compraList;
+    public void setCompraCollection(Collection<Compra> compraCollection) {
+        this.compraCollection = compraCollection;
     }
 
     @XmlTransient
-    public List<Montra> getMontraList() {
-        return montraList;
+    public Collection<Montra> getMontraCollection() {
+        return montraCollection;
     }
 
-    public void setMontraList(List<Montra> montraList) {
-        this.montraList = montraList;
+    public void setMontraCollection(Collection<Montra> montraCollection) {
+        this.montraCollection = montraCollection;
     }
 
     @Override

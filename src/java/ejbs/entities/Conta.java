@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ed
  */
 @Entity
-@Table(catalog = "ucandb", schema = "POSTGRES", uniqueConstraints = {
+@Table(catalog = "ucandb", schema = "public", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"email"}),
     @UniqueConstraint(columnNames = {"username"})})
 @XmlRootElement
@@ -66,7 +66,7 @@ public class Conta implements Serializable {
     @Column(nullable = false, length = 200)
     private String email;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "conta")
-    private List<Compra> compraList;
+    private Collection<Compra> compraCollection;
     @JoinColumn(name = "fk_pessoa", referencedColumnName = "pk_pessoa", nullable = false)
     @ManyToOne(optional = false)
     private Pessoa fkPessoa;
@@ -121,12 +121,12 @@ public class Conta implements Serializable {
     }
 
     @XmlTransient
-    public List<Compra> getCompraList() {
-        return compraList;
+    public Collection<Compra> getCompraCollection() {
+        return compraCollection;
     }
 
-    public void setCompraList(List<Compra> compraList) {
-        this.compraList = compraList;
+    public void setCompraCollection(Collection<Compra> compraCollection) {
+        this.compraCollection = compraCollection;
     }
 
     public Pessoa getFkPessoa() {

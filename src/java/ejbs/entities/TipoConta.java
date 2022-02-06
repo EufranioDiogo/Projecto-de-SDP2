@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ed
  */
 @Entity
-@Table(name = "tipo_conta", catalog = "ucandb", schema = "POSTGRES")
+@Table(name = "tipo_conta", catalog = "ucandb", schema = "public")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoConta.findAll", query = "SELECT t FROM TipoConta t"),
@@ -46,7 +46,7 @@ public class TipoConta implements Serializable {
     @Column(nullable = false, length = 200)
     private String designacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkTipoConta")
-    private List<Conta> contaList;
+    private Collection<Conta> contaCollection;
 
     public TipoConta() {
     }
@@ -77,12 +77,12 @@ public class TipoConta implements Serializable {
     }
 
     @XmlTransient
-    public List<Conta> getContaList() {
-        return contaList;
+    public Collection<Conta> getContaCollection() {
+        return contaCollection;
     }
 
-    public void setContaList(List<Conta> contaList) {
-        this.contaList = contaList;
+    public void setContaCollection(Collection<Conta> contaCollection) {
+        this.contaCollection = contaCollection;
     }
 
     @Override

@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ed
  */
 @Entity
-@Table(catalog = "ucandb", schema = "POSTGRES")
+@Table(catalog = "ucandb", schema = "public")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Localidade.findAll", query = "SELECT l FROM Localidade l"),
@@ -48,9 +48,9 @@ public class Localidade implements Serializable {
     @Column(nullable = false, length = 200)
     private String designacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkLocalidade")
-    private List<Endereco> enderecoList;
+    private Collection<Endereco> enderecoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkLocalidade")
-    private List<Localidade> localidadeList;
+    private Collection<Localidade> localidadeCollection;
     @JoinColumn(name = "fk_localidade", referencedColumnName = "pk_localidade", nullable = false)
     @ManyToOne(optional = false)
     private Localidade fkLocalidade;
@@ -84,21 +84,21 @@ public class Localidade implements Serializable {
     }
 
     @XmlTransient
-    public List<Endereco> getEnderecoList() {
-        return enderecoList;
+    public Collection<Endereco> getEnderecoCollection() {
+        return enderecoCollection;
     }
 
-    public void setEnderecoList(List<Endereco> enderecoList) {
-        this.enderecoList = enderecoList;
+    public void setEnderecoCollection(Collection<Endereco> enderecoCollection) {
+        this.enderecoCollection = enderecoCollection;
     }
 
     @XmlTransient
-    public List<Localidade> getLocalidadeList() {
-        return localidadeList;
+    public Collection<Localidade> getLocalidadeCollection() {
+        return localidadeCollection;
     }
 
-    public void setLocalidadeList(List<Localidade> localidadeList) {
-        this.localidadeList = localidadeList;
+    public void setLocalidadeCollection(Collection<Localidade> localidadeCollection) {
+        this.localidadeCollection = localidadeCollection;
     }
 
     public Localidade getFkLocalidade() {

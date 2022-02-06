@@ -1,0 +1,15 @@
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Sun Feb  6 17:49:20 2022
+Invocation: foremost 
+Output directory: /home/ed/NetBeansProjects/Projecto Exame SDP2/output
+Configuration file: /etc/foremost.conf
+------------------------------------------------------------------
+File: stdin
+Start: Sun Feb  6 17:49:20 2022
+Length: Unknown
+ 
+Num	 Name (bs=512)	       Size	 File Offset	 Comment 
+
+Interrupt received at Sun Feb  6 17:49:48 2022

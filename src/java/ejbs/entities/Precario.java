@@ -29,15 +29,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ed
  */
 @Entity
-@Table(name = "compra_veiculo", catalog = "ucandb", schema = "public")
+@Table(catalog = "ucandb", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CompraVeiculo.findAll", query = "SELECT c FROM CompraVeiculo c"),
-    @NamedQuery(name = "CompraVeiculo.findByPkCompraVeiculo", query = "SELECT c FROM CompraVeiculo c WHERE c.pkCompraVeiculo = :pkCompraVeiculo"),
-    @NamedQuery(name = "CompraVeiculo.findByValorCompra", query = "SELECT c FROM CompraVeiculo c WHERE c.valorCompra = :valorCompra"),
-    @NamedQuery(name = "CompraVeiculo.findByQuantidadeComprada", query = "SELECT c FROM CompraVeiculo c WHERE c.quantidadeComprada = :quantidadeComprada"),
-    @NamedQuery(name = "CompraVeiculo.findByDataCompra", query = "SELECT c FROM CompraVeiculo c WHERE c.dataCompra = :dataCompra")})
-public class CompraVeiculo implements Serializable {
+    @NamedQuery(name = "Precario.findAll", query = "SELECT p FROM Precario p"),
+    @NamedQuery(name = "Precario.findByPkCompraVeiculo", query = "SELECT p FROM Precario p WHERE p.pkCompraVeiculo = :pkCompraVeiculo"),
+    @NamedQuery(name = "Precario.findByValorCompra", query = "SELECT p FROM Precario p WHERE p.valorCompra = :valorCompra"),
+    @NamedQuery(name = "Precario.findByDataCompra", query = "SELECT p FROM Precario p WHERE p.dataCompra = :dataCompra")})
+public class Precario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,28 +50,23 @@ public class CompraVeiculo implements Serializable {
     private BigInteger valorCompra;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "quantidade_comprada", nullable = false)
-    private int quantidadeComprada;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "data_compra", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCompra;
-    @JoinColumn(name = "fk_portfolio", referencedColumnName = "pk_portfolio", nullable = false)
+    @JoinColumn(name = "fk_stock", referencedColumnName = "pk_stock", nullable = false)
     @ManyToOne(optional = false)
-    private Portfolio fkPortfolio;
+    private Stock fkStock;
 
-    public CompraVeiculo() {
+    public Precario() {
     }
 
-    public CompraVeiculo(Integer pkCompraVeiculo) {
+    public Precario(Integer pkCompraVeiculo) {
         this.pkCompraVeiculo = pkCompraVeiculo;
     }
 
-    public CompraVeiculo(Integer pkCompraVeiculo, BigInteger valorCompra, int quantidadeComprada, Date dataCompra) {
+    public Precario(Integer pkCompraVeiculo, BigInteger valorCompra, Date dataCompra) {
         this.pkCompraVeiculo = pkCompraVeiculo;
         this.valorCompra = valorCompra;
-        this.quantidadeComprada = quantidadeComprada;
         this.dataCompra = dataCompra;
     }
 
@@ -92,14 +86,6 @@ public class CompraVeiculo implements Serializable {
         this.valorCompra = valorCompra;
     }
 
-    public int getQuantidadeComprada() {
-        return quantidadeComprada;
-    }
-
-    public void setQuantidadeComprada(int quantidadeComprada) {
-        this.quantidadeComprada = quantidadeComprada;
-    }
-
     public Date getDataCompra() {
         return dataCompra;
     }
@@ -108,12 +94,12 @@ public class CompraVeiculo implements Serializable {
         this.dataCompra = dataCompra;
     }
 
-    public Portfolio getFkPortfolio() {
-        return fkPortfolio;
+    public Stock getFkStock() {
+        return fkStock;
     }
 
-    public void setFkPortfolio(Portfolio fkPortfolio) {
-        this.fkPortfolio = fkPortfolio;
+    public void setFkStock(Stock fkStock) {
+        this.fkStock = fkStock;
     }
 
     @Override
@@ -126,10 +112,10 @@ public class CompraVeiculo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CompraVeiculo)) {
+        if (!(object instanceof Precario)) {
             return false;
         }
-        CompraVeiculo other = (CompraVeiculo) object;
+        Precario other = (Precario) object;
         if ((this.pkCompraVeiculo == null && other.pkCompraVeiculo != null) || (this.pkCompraVeiculo != null && !this.pkCompraVeiculo.equals(other.pkCompraVeiculo))) {
             return false;
         }
@@ -138,7 +124,7 @@ public class CompraVeiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "ejbs.entities.CompraVeiculo[ pkCompraVeiculo=" + pkCompraVeiculo + " ]";
+        return "ejbs.entities.Precario[ pkCompraVeiculo=" + pkCompraVeiculo + " ]";
     }
     
 }

@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,9 +48,9 @@ public class Localidade implements Serializable {
     @Column(nullable = false, length = 200)
     private String designacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkLocalidade")
-    private Collection<Endereco> enderecoCollection;
+    private List<Endereco> enderecoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkLocalidade")
-    private Collection<Localidade> localidadeCollection;
+    private List<Localidade> localidadeList;
     @JoinColumn(name = "fk_localidade", referencedColumnName = "pk_localidade", nullable = false)
     @ManyToOne(optional = false)
     private Localidade fkLocalidade;
@@ -84,21 +84,21 @@ public class Localidade implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Endereco> getEnderecoCollection() {
-        return enderecoCollection;
+    public List<Endereco> getEnderecoList() {
+        return enderecoList;
     }
 
-    public void setEnderecoCollection(Collection<Endereco> enderecoCollection) {
-        this.enderecoCollection = enderecoCollection;
+    public void setEnderecoList(List<Endereco> enderecoList) {
+        this.enderecoList = enderecoList;
     }
 
     @XmlTransient
-    public Collection<Localidade> getLocalidadeCollection() {
-        return localidadeCollection;
+    public List<Localidade> getLocalidadeList() {
+        return localidadeList;
     }
 
-    public void setLocalidadeCollection(Collection<Localidade> localidadeCollection) {
-        this.localidadeCollection = localidadeCollection;
+    public void setLocalidadeList(List<Localidade> localidadeList) {
+        this.localidadeList = localidadeList;
     }
 
     public Localidade getFkLocalidade() {

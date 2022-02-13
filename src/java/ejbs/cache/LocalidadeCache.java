@@ -77,7 +77,7 @@ public class LocalidadeCache implements Serializable
             {
                 first = false;
             }
-            msg += localidadeFacade.toString(t);
+            msg += localidadeFacade.toString();
         }
         return msg + " }";
     }

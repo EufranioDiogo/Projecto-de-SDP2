@@ -5,7 +5,7 @@
  */
 package ejbs.facades;
 
-import ejbs.entities.CompraVeiculo;
+import ejbs.entities.Precario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author ed
  */
 @Stateless
-public class CompraVeiculoFacade extends AbstractFacade<CompraVeiculo> {
+public class PrecarioFacade extends AbstractFacade<Precario> {
 
     @PersistenceContext(unitName = "UcanPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class CompraVeiculoFacade extends AbstractFacade<CompraVeiculo> {
         return em;
     }
 
-    public CompraVeiculoFacade() {
-        super(CompraVeiculo.class);
+    public PrecarioFacade() {
+        super(Precario.class);
     }
     
 }

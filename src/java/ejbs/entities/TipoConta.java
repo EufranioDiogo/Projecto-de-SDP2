@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class TipoConta implements Serializable {
     @Column(nullable = false, length = 200)
     private String designacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkTipoConta")
-    private Collection<Conta> contaCollection;
+    private List<Conta> contaList;
 
     public TipoConta() {
     }
@@ -77,12 +77,12 @@ public class TipoConta implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Conta> getContaCollection() {
-        return contaCollection;
+    public List<Conta> getContaList() {
+        return contaList;
     }
 
-    public void setContaCollection(Collection<Conta> contaCollection) {
-        this.contaCollection = contaCollection;
+    public void setContaList(List<Conta> contaList) {
+        this.contaList = contaList;
     }
 
     @Override

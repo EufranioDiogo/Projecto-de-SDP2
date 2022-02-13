@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -66,7 +66,7 @@ public class Conta implements Serializable {
     @Column(nullable = false, length = 200)
     private String email;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "conta")
-    private Collection<Compra> compraCollection;
+    private List<Compra> compraList;
     @JoinColumn(name = "fk_pessoa", referencedColumnName = "pk_pessoa", nullable = false)
     @ManyToOne(optional = false)
     private Pessoa fkPessoa;
@@ -121,12 +121,12 @@ public class Conta implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Compra> getCompraCollection() {
-        return compraCollection;
+    public List<Compra> getCompraList() {
+        return compraList;
     }
 
-    public void setCompraCollection(Collection<Compra> compraCollection) {
-        this.compraCollection = compraCollection;
+    public void setCompraList(List<Compra> compraList) {
+        this.compraList = compraList;
     }
 
     public Pessoa getFkPessoa() {

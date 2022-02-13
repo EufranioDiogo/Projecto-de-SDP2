@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,7 +48,7 @@ public class TipoVeiculo implements Serializable {
     @Column(nullable = false, length = 200)
     private String designacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkTipoVeiculo")
-    private Collection<Veiculo> veiculoCollection;
+    private List<Veiculo> veiculoList;
 
     public TipoVeiculo() {
     }
@@ -79,12 +79,12 @@ public class TipoVeiculo implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Veiculo> getVeiculoCollection() {
-        return veiculoCollection;
+    public List<Veiculo> getVeiculoList() {
+        return veiculoList;
     }
 
-    public void setVeiculoCollection(Collection<Veiculo> veiculoCollection) {
-        this.veiculoCollection = veiculoCollection;
+    public void setVeiculoList(List<Veiculo> veiculoList) {
+        this.veiculoList = veiculoList;
     }
 
     @Override

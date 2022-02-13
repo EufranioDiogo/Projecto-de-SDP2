@@ -17,6 +17,7 @@
     <class>ejbs.entities.Stock</class>
     <class>ejbs.entities.TipoVeiculo</class>
     <class>ejbs.entities.Compra</class>
+    <class>ejbs.entities.Precario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <jta-data-source>java:/UcanDS</jta-data-source>
   </persistence-unit>

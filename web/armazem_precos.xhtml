@@ -1,12 +1,84 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <ui:composition template="template.xhtml">
+            <ui:define name="conteudo">
+                <div>
+                    <h1>Preço Productos Armazem</h1>
+                    <div>
+                        <h:form>
+                            <p:panelGrid columns="2">
+                                <h:outputLabel value="Producto a adicionar: "/>
+                                <h:selectOneMenu value="#{armazemPrecoBean.precario.fkStock.pkStock}" required="true">
+                                    <f:selectItems 
+                                        value="#{armazemPrecoBean.listaProductosStock}"
+                                        var="armazemProducto" 
+                                        itemLabel="#{armazemProducto.fkPortfolio.designacao}" 
+                                        itemValue="#{armazemProducto.pkStock}"/>
+                                </h:selectOneMenu>
+
+                                <h:outputLabel value="Valor do Veiculo: "/>
+                                <h:inputText value="#{armazemPrecoBean.precario.valorCompra}" required="true"/>
+
+
+                                <h:outputLabel value="Data de Compra: "/>
+                                <p:calendar value="#{armazemPrecoBean.precario.dataCompra}"  navigator="true" required="true"/>
+
+
+
+                                <p:panelGrid columns="3">
+                                    <p:commandButton 
+                                        actionListener="#{armazemPrecoBean.salvar()}" 
+                                        value="Salvar"
+                                        />
+                                    <p:commandButton 
+                                        actionListener="#{armazemPrecoBean.limpar()}" 
+                                        value="Limpar" 
+                                        />
+                                    <p:commandButton 
+                                        action="home?faces-redirect=true"
+                                        value="Sair"
+
+                                        />
+                                </p:panelGrid>
+                            </p:panelGrid>
+
+                        </h:form>
+                    </div>
+                </div>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+        <ui:composition template="template.xhtml">
+            <ui:define name="conteudo">
+                <p:dataTable  id="dt" value="#{armazemRupturaBean.listaProductosPreRupturaStock}" var="stockElement">
+                    <f:facet name="header">
+                        <h:outputText value="Dados productos pre-ruptura em Stock" />
+                    </f:facet>
+
+                    <p:column headerText="Nome">       
+                        <p:outputLabel value="#{stockElement.fkPortfolio.designacao}"/>
+                    </p:column>
+                    <p:column headerText="Quantidade Actual Stock">   
+                        <p:outputLabel value="#{stockElement.quantVeiculoActual}"/>
+                    </p:column>
+                    <p:column headerText="Quantidade Máxima Stock">    
+                        <p:outputLabel value="#{stockElement.quantProductoMaxima}"/>
+                    </p:column>
+                </p:dataTable>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

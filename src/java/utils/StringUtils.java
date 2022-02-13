@@ -16,4 +16,12 @@ public class StringUtils
         return ((st == null) || (st.isEmpty()));
             
     }
+
+    static boolean containsAny(String telefone, String string, String string0) {
+        return true; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    static boolean containsAny(String telefone, String string, String string0, String string1) {
+        return true; //To change body of generated methods, choose Tools | Templates.
+    }
 }

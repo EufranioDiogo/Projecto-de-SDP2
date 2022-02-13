@@ -6,6 +6,7 @@
 package ejbs.facades;
 
 import ejbs.entities.Portfolio;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +29,9 @@ public class PortfolioFacade extends AbstractFacade<Portfolio> {
     public PortfolioFacade() {
         super(Portfolio.class);
     }
-    
+
+    public List<Portfolio> findAllVeiculos() {
+        return em.createQuery("SELECT p FROM Portfolio p WHERE p.pkPortfolio LIKE '_._._'").getResultList();
+    }
+
 }

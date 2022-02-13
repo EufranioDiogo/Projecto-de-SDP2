@@ -36,6 +36,7 @@ public class ArmazemEntradaBean implements Serializable {
     private StockFacade stockFacade;
 
     public ArmazemEntradaBean() {
+        
     }
 
     @PostConstruct
@@ -43,9 +44,10 @@ public class ArmazemEntradaBean implements Serializable {
         elementoStock = new Stock();
         this.initPortfolio();
     }
+    
 
     private void initPortfolio() {
-        this.listProductosPortfolio = this.portfolioFacade.findAll();
+        this.listProductosPortfolio = this.portfolioFacade.findAllVeiculos();
     }
 
     public List<Portfolio> getListProductosPortfolio() {

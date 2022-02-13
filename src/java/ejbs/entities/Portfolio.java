@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -51,11 +51,9 @@ public class Portfolio implements Serializable {
     @Column(name = "fk_portfolio", length = 200)
     private String fkPortfolio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPortfolio")
-    private Collection<Veiculo> veiculoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPortfolio")
-    private Collection<CompraVeiculo> compraVeiculoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPortfolio")
-    private Collection<Stock> stockCollection;
+    private List<Veiculo> veiculoList;
+    @OneToMany(mappedBy = "fkPortfolio")
+    private List<Stock> stockList;
 
     public Portfolio() {
     }
@@ -94,30 +92,21 @@ public class Portfolio implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Veiculo> getVeiculoCollection() {
-        return veiculoCollection;
+    public List<Veiculo> getVeiculoList() {
+        return veiculoList;
     }
 
-    public void setVeiculoCollection(Collection<Veiculo> veiculoCollection) {
-        this.veiculoCollection = veiculoCollection;
-    }
-
-    @XmlTransient
-    public Collection<CompraVeiculo> getCompraVeiculoCollection() {
-        return compraVeiculoCollection;
-    }
-
-    public void setCompraVeiculoCollection(Collection<CompraVeiculo> compraVeiculoCollection) {
-        this.compraVeiculoCollection = compraVeiculoCollection;
+    public void setVeiculoList(List<Veiculo> veiculoList) {
+        this.veiculoList = veiculoList;
     }
 
     @XmlTransient
-    public Collection<Stock> getStockCollection() {
-        return stockCollection;
+    public List<Stock> getStockList() {
+        return stockList;
     }
 
-    public void setStockCollection(Collection<Stock> stockCollection) {
-        this.stockCollection = stockCollection;
+    public void setStockList(List<Stock> stockList) {
+        this.stockList = stockList;
     }
 
     @Override

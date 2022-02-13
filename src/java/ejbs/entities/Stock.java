@@ -6,7 +6,9 @@
 package ejbs.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +18,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,16 +43,14 @@ public class Stock implements Serializable {
     @Basic(optional = false)
     @Column(name = "pk_stock", nullable = false)
     private Integer pkStock;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "quant_veiculo_actual", nullable = false)
-    private int quantVeiculoActual;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "quant_producto_maxima", nullable = false)
-    private int quantProductoMaxima;
-    @JoinColumn(name = "fk_portfolio", referencedColumnName = "pk_portfolio", nullable = false)
-    @ManyToOne(optional = false)
+    @Column(name = "quant_veiculo_actual")
+    private Integer quantVeiculoActual;
+    @Column(name = "quant_producto_maxima")
+    private Integer quantProductoMaxima;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkStock")
+    private List<Precario> precarioList;
+    @JoinColumn(name = "fk_portfolio", referencedColumnName = "pk_portfolio")
+    @ManyToOne
     private Portfolio fkPortfolio;
 
     public Stock() {
@@ -57,12 +58,6 @@ public class Stock implements Serializable {
 
     public Stock(Integer pkStock) {
         this.pkStock = pkStock;
-    }
-
-    public Stock(Integer pkStock, int quantVeiculoActual, int quantProductoMaxima) {
-        this.pkStock = pkStock;
-        this.quantVeiculoActual = quantVeiculoActual;
-        this.quantProductoMaxima = quantProductoMaxima;
     }
 
     public Integer getPkStock() {
@@ -73,20 +68,29 @@ public class Stock implements Serializable {
         this.pkStock = pkStock;
     }
 
-    public int getQuantVeiculoActual() {
+    public Integer getQuantVeiculoActual() {
         return quantVeiculoActual;
     }
 
-    public void setQuantVeiculoActual(int quantVeiculoActual) {
+    public void setQuantVeiculoActual(Integer quantVeiculoActual) {
         this.quantVeiculoActual = quantVeiculoActual;
     }
 
-    public int getQuantProductoMaxima() {
+    public Integer getQuantProductoMaxima() {
         return quantProductoMaxima;
     }
 
-    public void setQuantProductoMaxima(int quantProductoMaxima) {
+    public void setQuantProductoMaxima(Integer quantProductoMaxima) {
         this.quantProductoMaxima = quantProductoMaxima;
+    }
+
+    @XmlTransient
+    public List<Precario> getPrecarioList() {
+        return precarioList;
+    }
+
+    public void setPrecarioList(List<Precario> precarioList) {
+        this.precarioList = precarioList;
     }
 
     public Portfolio getFkPortfolio() {

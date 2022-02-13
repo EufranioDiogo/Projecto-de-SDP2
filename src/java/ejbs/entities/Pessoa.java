@@ -6,8 +6,8 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -62,9 +62,9 @@ public class Pessoa implements Serializable {
     @ManyToOne(optional = false)
     private Sexo fkSexo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPessoa")
-    private Collection<Endereco> enderecoCollection;
+    private List<Endereco> enderecoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPessoa")
-    private Collection<Conta> contaCollection;
+    private List<Conta> contaList;
 
     public Pessoa() {
     }
@@ -112,21 +112,21 @@ public class Pessoa implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Endereco> getEnderecoCollection() {
-        return enderecoCollection;
+    public List<Endereco> getEnderecoList() {
+        return enderecoList;
     }
 
-    public void setEnderecoCollection(Collection<Endereco> enderecoCollection) {
-        this.enderecoCollection = enderecoCollection;
+    public void setEnderecoList(List<Endereco> enderecoList) {
+        this.enderecoList = enderecoList;
     }
 
     @XmlTransient
-    public Collection<Conta> getContaCollection() {
-        return contaCollection;
+    public List<Conta> getContaList() {
+        return contaList;
     }
 
-    public void setContaCollection(Collection<Conta> contaCollection) {
-        this.contaCollection = contaCollection;
+    public void setContaList(List<Conta> contaList) {
+        this.contaList = contaList;
     }
 
     @Override

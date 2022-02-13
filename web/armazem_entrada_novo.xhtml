@@ -9,18 +9,18 @@
         <ui:composition template="template.xhtml">
             <ui:define name="conteudo">
                 <div>
-                    <h1>Entrada de Productos Armazem rfd</h1>
+                    <h1>Entrada de Productos Armazem</h1>
                     <div>
                         <h:form>
                             <p:panelGrid columns="2">
                                 <h:outputLabel value="Producto a adicionar: "/>
-                                <h:selectOneMenu value="#{armazemEntradaBean.automovelSelecionado}" required="true">
+                                <p:selectOneMenu value="#{armazemEntradaBean.automovelSelecionado}" required="true">
                                     <f:selectItems 
                                         value="#{armazemEntradaBean.listProductosPortfolio}"
                                         var="portfolioProduct" 
                                         itemLabel="#{portfolioProduct.designacao}" 
                                         itemValue="#{portfolioProduct.pkPortfolio}"/>
-                                </h:selectOneMenu>
+                                </p:selectOneMenu>
 
                                 <h:outputLabel value="Quantidade de Veiculos: "/>
                                 <h:inputText value="#{armazemEntradaBean.quantAutomoveis}" required="true"/>

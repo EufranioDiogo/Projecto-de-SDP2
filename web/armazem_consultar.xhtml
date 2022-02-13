@@ -11,19 +11,19 @@
     <h:body>
         <ui:composition template="template.xhtml">
             <ui:define name="conteudo">
-                <p:dataTable  id="dt" value="#{clienteCriarBean.clienteList}" var="cliente">
+                <p:dataTable  id="dt" value="#{armazemConsultarBean.listaProductosStock}" var="stockElement">
                     <f:facet name="header">
-                        <h:outputText value="Dados do Cliente" />
+                        <h:outputText value="Dados productos em Stock" />
                     </f:facet>
 
                     <p:column headerText="Nome">       
-                        <p:outputLabel value="#{cliente.fkPessoa.nome}"/>
+                        <p:outputLabel value="#{stockElement.fkPortfolio.designacao}"/>
                     </p:column>
-                    <p:column headerText="Sexo">   
-                        <p:outputLabel value="#{cliente.fkPessoa.fkSexo.sexo}"/>
+                    <p:column headerText="Quantidade Actual Stock">   
+                        <p:outputLabel value="#{stockElement.quantVeiculoActual}"/>
                     </p:column>
-                    <p:column headerText="Data de Cadastro">    
-                        <p:outputLabel value="#{cliente.fkPessoa.dataCadastro}"/>
+                    <p:column headerText="Quantidade Máxima Stock">    
+                        <p:outputLabel value="#{stockElement.quantProductoMaxima}"/>
                     </p:column>
                 </p:dataTable>
             </ui:define>

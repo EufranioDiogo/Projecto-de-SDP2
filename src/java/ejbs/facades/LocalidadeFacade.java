@@ -28,13 +28,5 @@ public class LocalidadeFacade extends AbstractFacade<Localidade> {
     public LocalidadeFacade() {
         super(Localidade.class);
     }
-
-    @Override
-    public String toString() {
-        return "LocalidadeFacade{" + "em=" + em + '}';
-    }
     
-    public String toString(Localidade localidade) {
-        return localidade.toString();
-    }
 }

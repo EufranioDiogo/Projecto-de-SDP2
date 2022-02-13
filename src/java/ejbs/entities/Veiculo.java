@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -60,9 +60,9 @@ public class Veiculo implements Serializable {
     @ManyToOne(optional = false)
     private TipoVeiculo fkTipoVeiculo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculo")
-    private Collection<Compra> compraCollection;
+    private List<Compra> compraList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkProducto")
-    private Collection<Montra> montraCollection;
+    private List<Montra> montraList;
 
     public Veiculo() {
     }
@@ -117,21 +117,21 @@ public class Veiculo implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Compra> getCompraCollection() {
-        return compraCollection;
+    public List<Compra> getCompraList() {
+        return compraList;
     }
 
-    public void setCompraCollection(Collection<Compra> compraCollection) {
-        this.compraCollection = compraCollection;
+    public void setCompraList(List<Compra> compraList) {
+        this.compraList = compraList;
     }
 
     @XmlTransient
-    public Collection<Montra> getMontraCollection() {
-        return montraCollection;
+    public List<Montra> getMontraList() {
+        return montraList;
     }
 
-    public void setMontraCollection(Collection<Montra> montraCollection) {
-        this.montraCollection = montraCollection;
+    public void setMontraList(List<Montra> montraList) {
+        this.montraList = montraList;
     }
 
     @Override

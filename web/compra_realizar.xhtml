@@ -1,12 +1,59 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <ui:composition template="template.xhtml">
+            <ui:define name="conteudo">
+                <div style="width: 100vw; display: flex; flex-direction: column; margin-left: 0;">
+                    <h:form>
+                        <div style="width: 90%; display: flex; flex-wrap: wrap; margin: 50px 0;">
+                            <p:graphicImage value="/resources/images/pexels-mike-112460.jpg"  style="display: inline-block; width: 35%;" />
+
+                            <div style="display: flex; flex-direction: column; justify-content: space-between; margin-left: 20px; ">
+                                <div>
+                                    <h1 style="margin: 5px 0; text-align: left;">Mercedes Alguma coisa</h1>
+                                    <h3 style="margin: 5px 0; text-align: left;">Preço: <b>10.000.000</b></h3>
+                                </div>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="Quantidade: "/>
+                                    <p:inputText />
+                                </p:panelGrid>
+                            </div>
+                        </div>
+                        
+                        <div style="width: 90%; display: flex; flex-wrap: wrap; margin: 50px 0;">
+                            <p:graphicImage value="/resources/images/pexels-mike-112460.jpg"  style="display: inline-block; width: 35%;" />
+
+                            <div style="display: flex; flex-direction: column; justify-content: space-between; margin-left: 20px; ">
+                                <div>
+                                    <h1 style="margin: 5px 0; text-align: left;">Mercedes Alguma coisa</h1>
+                                    <h3 style="margin: 5px 0; text-align: left;">Preço: <b>10.000.000</b></h3>
+                                </div>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="Quantidade: "/>
+                                    <p:inputText />
+                                </p:panelGrid>
+                            </div>
+                        </div>
+                        
+                        
+
+                        <p:panelGrid columns="3" style="">
+                            <p:commandButton value="Efectuar Comprar"/>
+                            <p:commandButton value="Esvaziar"/>
+                        </p:panelGrid>
+                    </h:form>
+                </div>
+
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

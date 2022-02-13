@@ -1,12 +1,77 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <ui:composition template="template.xhtml">
+            <ui:define name="conteudo">
+                <h1>Criar conta</h1>
+
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nome: "/>
+                        <p:inputText/>
+                        <p:outputLabel value="Sexo: "/>
+                        <p:selectOneRadio>
+                            <f:selectItem itemLabel="Masculino" itemValue="m"/>
+                            <f:selectItem itemLabel="Femenino" itemValue="f"/>
+                        </p:selectOneRadio>
+                        <p:outputLabel value="Data Nascimento: "/>
+                        <p:calendar navigator="true"/>
+                        <p:outputLabel value="Username: "/>
+                        <p:inputText/>
+                        <p:outputLabel value="Password: "/>
+                        <p:inputText/>
+                        <p:outputLabel value="Email"/>
+                        <p:inputText/>
+                        <p:outputLabel value="Endereço"/>
+
+                        <p:panelGrid columns="3">
+                            <p:selectOneMenu value="" required="true">
+                                <f:selectItem  
+                                    itemLabel="Pais" 
+                                    itemValue="Angola"/>
+                            </p:selectOneMenu>
+
+                            <p:selectOneMenu value="" required="true">
+                                <f:selectItem  
+                                    itemLabel="Provincia" 
+                                    itemValue="Luanda"/>
+                            </p:selectOneMenu>
+
+                            <p:selectOneMenu value="" required="true">
+                                <f:selectItem  
+                                    itemLabel="Municipio" 
+                                    itemValue="Luanda"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+
+                        <p:panelGrid columns="3">
+                            <p:commandButton 
+                                actionListener="#{armazemEntradaBean.salvar()}" 
+                                value="Salvar"
+                                />
+                            <p:commandButton 
+                                actionListener="#{armazemEntradaBean.limpar()}" 
+                                value="Limpar" 
+                                />
+                            <p:commandButton 
+                                action="home?faces-redirect=true"
+                                value="Sair"
+
+                                />
+                        </p:panelGrid>
+
+                    </p:panelGrid>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

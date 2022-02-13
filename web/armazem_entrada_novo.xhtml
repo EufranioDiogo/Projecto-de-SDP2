@@ -2,56 +2,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      >
-
-    <h:head>
-        <title>Armazem Entrada</title>
-    </h:head>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"  
+      xmlns:p="http://primefaces.org/ui" >
     <h:body>
-        <h1>Entrada de Productos Armazem</h1>
+        <ui:composition template="template.xhtml">
+            <ui:define name="conteudo">
+                <div>
+                    <h1>Entrada de Productos Armazem rfd</h1>
+                    <div>
+                        <h:form>
+                            <p:panelGrid columns="2">
+                                <h:outputLabel value="Producto a adicionar: "/>
+                                <h:selectOneMenu value="#{armazemEntradaBean.automovelSelecionado}" required="true">
+                                    <f:selectItems 
+                                        value="#{armazemEntradaBean.listProductosPortfolio}"
+                                        var="portfolioProduct" 
+                                        itemLabel="#{portfolioProduct.designacao}" 
+                                        itemValue="#{portfolioProduct.pkPortfolio}"/>
+                                </h:selectOneMenu>
 
-        <ui:composition template="./template.xhtml">
+                                <h:outputLabel value="Quantidade de Veiculos: "/>
+                                <h:inputText value="#{armazemEntradaBean.quantAutomoveis}" required="true"/>
 
-            <ui:define name="content">
-                <p:panel>
-                    <p:panelGrid columns="2">
-                        <h:outputLabel value="Producto a adicionar: "/>
-                        <h:selectOneMenu value="#{armazemEntradaBean.elementoStock.fkPortfolio}">
-                            <f:selectItems 
-                                value="#{armazemEntradaBean.portfolioProductList}"
-                                var="portfolioProduct" 
-                                itemLabel="#{portfolioProduct.designacao}" 
-                                itemValue="#{portfolioProduct.pkPortfolio}"/>
-                        </h:selectOneMenu>
-
-                        <h:outputLabel value="Quantidade de Veiculos: "/>
-                        <h:inputText value="#{armazemEntradaBean.elementoStock.quantVeiculoActual}"/>
+                                <h:outputLabel value="Quantidade máxima de Veiculos "/>
+                                <h:inputText value="#{armazemEntradaBean.quantMaximaAutomoveis}" required="true"/>
 
 
-                        <h:outputLabel value="Quantidade máxima de Veiculos "/>
-                        <h:inputText value="#{armazemEntradaBean.elementoStock.quantProductoMaxima}"/>
+                                <p:panelGrid columns="3">
+                                    <p:commandButton 
+                                        actionListener="#{armazemEntradaBean.salvar()}" 
+                                        value="Salvar"
+                                        />
+                                    <p:commandButton 
+                                        actionListener="#{armazemEntradaBean.limpar()}" 
+                                        value="Limpar" 
+                                        />
+                                    <p:commandButton 
+                                        action="home?faces-redirect=true"
+                                        value="Sair"
 
-                    </p:panelGrid>
+                                        />
+                                </p:panelGrid>
+                            </p:panelGrid>
 
-                    <p:panelGrid columns="3">
-                        <p:commandButton 
-                            actionListener="#{armazemEntradaBean.salvarProductoArmazem()}" 
-                            value="Salvar"
-                            />
-                        <p:commandButton 
-                            actionListener="#{bilheteIdentidadeNovoBean.limpar()}" 
-                            value="Limpar" 
-                            />
-                        <p:commandButton 
-                            action="formulario_principal?faces-redirect=true"
-                            value="Sair"
-                            />
+                        </h:form>
+                    </div>
+                </div>
 
-                    </p:panelGrid>
-                </p:panel>
+
             </ui:define>
 
         </ui:composition>

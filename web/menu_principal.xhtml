@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML?faces-redirect=true 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml?faces-redirect=true1/DTD/xhtml?faces-redirect=true1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml?faces-redirect=true"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"  
+    xmlns:p="http://primefaces.org/ui" >
+    <h:body>
+        <h:form>
+            <p:menubar>
+                <p:submenu label="Armazem">
+                    <p:menuitem 
+                        value="Entrada de productos" 
+                        action="armazem_entrada_novo.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem 
+                        value="Consultar armazem"
+                        action="armazem_consultar.xhtml?faces-redirect=true"
+
+                        />
+                    <p:menuitem 
+                        value="Definir preços"
+                        action="armazem_precos.xhtml?faces-redirect=true"
+
+                        />
+                    <p:menuitem
+                        value="Productos ruptura"
+                        action="armazem_ruptura.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Productos quase ruptura"
+                        action="armazem_quase_ruptura.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Productos pre ruptura"
+                        action="armazem_pre_ruptura.xhtml?faces-redirect=true"
+                        />
+                </p:submenu>
+
+                <p:submenu label="Montra">
+                    <p:menuitem
+                        value="Ver"
+                        action="montra_ver.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Adicionar"
+                        action="montra_adicionar.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Remover"
+                        action="montra_remover.xhtml?faces-redirect=true"
+                        />
+                </p:submenu>
+
+                <p:submenu label="Compra">
+                    <p:menuitem
+                        value="Realizar"
+                        action="compra_realizar.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Ver Todas"
+                        action="compra_ver.xhtml?faces-redirect=true"
+                        />
+                </p:submenu>
+
+                <p:submenu label="Conta">
+                    <p:menuitem
+                        value="Criar"
+                        action="conta_criar.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Editar"
+                        action="conta_editar.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Eliminar"
+                        action="conta_eliminar.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Ver contas"
+                        action="conta_ver.xhtml?faces-redirect=true"
+                        />
+                </p:submenu>
+
+                <p:submenu label="Balancetes">
+                    <p:menuitem
+                        value="Diarios"
+                        action="balancetes_diarios.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Mensais"
+                        action="balancetes_mensais.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Intervalo de Tempo"
+                        action="balancetes_intervalo_tempo.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Tipo productos"
+                        action="balancetes_tipo_productos.xhtml?faces-redirect=true"
+                        />
+                </p:submenu>
+
+                <p:submenu label="Acções">
+                    <p:menuitem
+                        value="Carregar Portfolio"
+                        actionListener="#{accoesBean.see()}"
+                        />
+                    <p:menuitem
+                        value="Mensais"
+                        action="balancetes_mensais.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Intervalo de Tempo"
+                        action="balancetes_intervalo_tempo.xhtml?faces-redirect=true"
+                        />
+                    <p:menuitem
+                        value="Tipo productos"
+                        action="balancetes_tipo_productos.xhtml?faces-redirect=true"
+                        />
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+        <f:facet name="options">
+        </f:facet>
+    </h:body>
+</ui:composition>

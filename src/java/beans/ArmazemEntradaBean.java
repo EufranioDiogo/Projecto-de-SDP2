@@ -3,38 +3,51 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package beans.armazem;
+package beans;
 
 import ejbs.entities.Portfolio;
 import ejbs.entities.Stock;
 import ejbs.facades.PortfolioFacade;
 import ejbs.facades.StockFacade;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import org.omnifaces.cdi.ViewScoped;
 
 /**
  *
- * @author ed
+ * @author milzio
  */
-@Named(value = "armazemEntradaBean")
+@Named()
 @ViewScoped
 public class ArmazemEntradaBean implements Serializable {
 
-    private List<Portfolio> listProductosPortfolio = new ArrayList<>();
+    private List<Portfolio> listProductosPortfolio;
     private String automovelSelecionado;
     private int quantAutomoveis;
     private int quantMaximaAutomoveis;
     private Stock elementoStock;
-    
+
+    @EJB
+    private PortfolioFacade portfolioFacade;
+    @EJB
+    private StockFacade stockFacade;
+
     public ArmazemEntradaBean() {
-        elementoStock = new Stock();
     }
+
+    @PostConstruct
+    public void init() {
+        elementoStock = new Stock();
+        this.initPortfolio();
+    }
+
+    private void initPortfolio() {
+        this.listProductosPortfolio = this.portfolioFacade.findAll();
+    }
+
     public List<Portfolio> getListProductosPortfolio() {
         return listProductosPortfolio;
     }
@@ -67,5 +80,31 @@ public class ArmazemEntradaBean implements Serializable {
         this.quantMaximaAutomoveis = quantMaximaAutomoveis;
     }
 
-    
+    public Stock getElementoStock() {
+        return elementoStock;
+    }
+
+    public void setElementoStock(Stock elementoStock) {
+        this.elementoStock = elementoStock;
+    }
+
+    public void ola() {
+        System.out.println("Automovel: " + automovelSelecionado + " Quant Actual: " + quantAutomoveis + " Quant Max: " + quantMaximaAutomoveis);
+    }
+
+    public void limpar() {
+        System.out.println("Limpar");
+    }
+
+    public void salvar() {
+        try {
+            elementoStock.setFkPortfolio(new Portfolio(this.automovelSelecionado));
+            elementoStock.setQuantVeiculoActual(quantAutomoveis);
+            elementoStock.setQuantProductoMaxima(quantMaximaAutomoveis);
+
+            stockFacade.create(elementoStock);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
 }

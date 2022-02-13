@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.SessionScoped;
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -30,8 +31,8 @@ import org.apache.poi.ss.usermodel.Row;
  *
  * @author ed
  */
-@Named(value = "accoesBean")
-@ViewScoped
+@Named()
+@SessionScoped
 public class AccoesBean implements Serializable {
 
     /**
@@ -51,6 +52,7 @@ public class AccoesBean implements Serializable {
 
     
     public void see() {
+        System.out.println("Entrou");
         try {
             loadPortfolio("Portfolio_EufranioDiogo_SDP2.xls");
         } catch (Exception e) {
@@ -156,7 +158,7 @@ public class AccoesBean implements Serializable {
                 cell = cellIterator.next();
                 objFormulaEvaluator.evaluate(cell); // This will evaluate the cell, And any type of cell will return string val-ue
                 String cellValueStr = objDefaultFormat.formatCellValue(cell, objFormulaEvaluator);
-                System.out.println("0 Home setupportfolio{}\tcellValueStr: " + cellValueStr);
+                //System.out.println("0 Home setupportfolio{}\tcellValueStr: " + cellValueStr);
                 if (flag == false) {
                     actualItem = cellValueStr;
                 } else {
@@ -170,7 +172,7 @@ public class AccoesBean implements Serializable {
             if (result) {
                 actualFatherIndex = -1;
                 previousItem = actualItem;
-                System.out.println(previousItem);
+                //System.out.println(previousItem);
                 String query = "INSERT INTO portfolio(pk_portfolio, designacao) VALUES(?, ?);";
                 try {
                     PreparedStatement statement = connection.prepareStatement(query);

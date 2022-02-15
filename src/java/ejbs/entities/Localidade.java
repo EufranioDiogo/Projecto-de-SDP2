@@ -8,7 +8,6 @@ package ejbs.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -40,38 +39,37 @@ public class Localidade implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "pk_localidade", nullable = false)
-    private Integer pkLocalidade;
+    @Size(min = 1, max = 2147483647)
+    @Column(name = "pk_localidade", nullable = false, length = 2147483647)
+    private String pkLocalidade;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 200)
-    @Column(nullable = false, length = 200)
+    @Size(min = 1, max = 2147483647)
+    @Column(nullable = false, length = 2147483647)
     private String designacao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkLocalidade")
-    private List<Endereco> enderecoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkLocalidade")
+    @OneToMany(mappedBy = "fkLocalidade")
     private List<Localidade> localidadeList;
-    @JoinColumn(name = "fk_localidade", referencedColumnName = "pk_localidade", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "fk_localidade", referencedColumnName = "pk_localidade")
+    @ManyToOne
     private Localidade fkLocalidade;
 
     public Localidade() {
     }
 
-    public Localidade(Integer pkLocalidade) {
+    public Localidade(String pkLocalidade) {
         this.pkLocalidade = pkLocalidade;
     }
 
-    public Localidade(Integer pkLocalidade, String designacao) {
+    public Localidade(String pkLocalidade, String designacao) {
         this.pkLocalidade = pkLocalidade;
         this.designacao = designacao;
     }
 
-    public Integer getPkLocalidade() {
+    public String getPkLocalidade() {
         return pkLocalidade;
     }
 
-    public void setPkLocalidade(Integer pkLocalidade) {
+    public void setPkLocalidade(String pkLocalidade) {
         this.pkLocalidade = pkLocalidade;
     }
 
@@ -81,15 +79,6 @@ public class Localidade implements Serializable {
 
     public void setDesignacao(String designacao) {
         this.designacao = designacao;
-    }
-
-    @XmlTransient
-    public List<Endereco> getEnderecoList() {
-        return enderecoList;
-    }
-
-    public void setEnderecoList(List<Endereco> enderecoList) {
-        this.enderecoList = enderecoList;
     }
 
     @XmlTransient

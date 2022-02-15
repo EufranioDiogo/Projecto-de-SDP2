@@ -25,6 +25,13 @@
                     <p:column headerText="Quantidade Máxima Stock">    
                         <p:outputLabel value="#{stockElement.quantProductoMaxima}"/>
                     </p:column>
+                    <p:column headerText="Acções"> 
+                        <h:form>
+                            <p:commandButton value="Eliminar" >
+                                <p:ajax listener="#{armazemConsultarBean.delete(stockElement.pkStock)}" update="dt"/>
+                            </p:commandButton>
+                        </h:form>
+                    </p:column>
                 </p:dataTable>
             </ui:define>
         </ui:composition>

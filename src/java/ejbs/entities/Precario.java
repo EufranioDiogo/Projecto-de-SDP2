@@ -53,9 +53,9 @@ public class Precario implements Serializable {
     @Column(name = "data_compra", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCompra;
-    @JoinColumn(name = "fk_stock", referencedColumnName = "pk_stock", nullable = false)
+    @JoinColumn(name = "fk_producto", referencedColumnName = "pk_veiculo", nullable = false)
     @ManyToOne(optional = false)
-    private Stock fkStock;
+    private Veiculo fkProducto;
 
     public Precario() {
     }
@@ -94,12 +94,12 @@ public class Precario implements Serializable {
         this.dataCompra = dataCompra;
     }
 
-    public Stock getFkStock() {
-        return fkStock;
+    public Veiculo getFkProducto() {
+        return fkProducto;
     }
 
-    public void setFkStock(Stock fkStock) {
-        this.fkStock = fkStock;
+    public void setFkProducto(Veiculo fkProducto) {
+        this.fkProducto = fkProducto;
     }
 
     @Override

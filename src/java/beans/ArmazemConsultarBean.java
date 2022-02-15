@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import utils.Mensagem;
 
 /**
  *
@@ -21,24 +22,25 @@ import javax.faces.view.ViewScoped;
 @Named(value = "armazemConsultarBean")
 @ViewScoped
 public class ArmazemConsultarBean implements Serializable {
-    
+
     private List<Stock> listaProductosStock;
     @EJB
     private StockFacade stockFacade;
+
     /**
      * Creates a new instance of ArmazemConsultarBean
      */
     public ArmazemConsultarBean() {
     }
-    
+
     @PostConstruct
     public void init() {
         initStockList();
     }
-    
+
     public void initStockList() {
         this.listaProductosStock = stockFacade.findAll();
-        
+
     }
 
     public List<Stock> getListaProductosStock() {
@@ -47,5 +49,16 @@ public class ArmazemConsultarBean implements Serializable {
 
     public void setListaProductosStock(List<Stock> listaProductosStock) {
         this.listaProductosStock = listaProductosStock;
+    }
+
+    public void delete(int pk) {
+        try {
+            stockFacade.remove(new Stock(pk));
+
+            Mensagem.sucessoMsg("Producto Eliminado");
+
+        } catch (Exception e) {
+            Mensagem.erroMsg(e.toString());
+        }
     }
 }

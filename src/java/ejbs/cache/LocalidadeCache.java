@@ -31,7 +31,7 @@ public class LocalidadeCache implements Serializable
     @EJB
     private LocalidadeFacade localidadeFacade;
     private List<Localidade> paisLista, localidadeLista;
-    private HashMap<Integer, Localidade> localidadeMap;
+    private HashMap<String, Localidade> localidadeMap;
 
     /**
      * Creates a new instance of LocalidadeBean
@@ -57,7 +57,7 @@ public class LocalidadeCache implements Serializable
         }
     }
 
-    public Localidade find (Integer pkLocalidade)
+    public Localidade find (String pkLocalidade)
     {
         return this.localidadeMap.get(pkLocalidade);
     }
@@ -82,7 +82,7 @@ public class LocalidadeCache implements Serializable
         return msg + " }";
     }
 
-    public List<Localidade> findAllOrderedByNome (Integer pkPai)
+    public List<Localidade> findAllOrderedByNome (String pkPai)
     {
         List<Localidade> localidadeFilhos = new ArrayList<>();
         Localidade pai;
@@ -142,12 +142,8 @@ public class LocalidadeCache implements Serializable
         this.paisLista = new ArrayList<>();
         for (Localidade l : this.localidadeLista)
         {
-            if (l.getFkLocalidade() != null)
-            {
-                continue;
-            }
-            else
-            {
+            System.out.println(l.getFkLocalidade());
+            if (l.getFkLocalidade() == null) {
                 this.paisLista.add(l);
             }
             

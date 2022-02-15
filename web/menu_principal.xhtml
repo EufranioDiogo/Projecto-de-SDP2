@@ -10,9 +10,9 @@
         <h:form>
             <p:menubar>
                 <p:menuitem 
-                        value="Home" 
-                        action="home.xhtml?faces-redirect=true"
-                        />
+                    value="Home" 
+                    action="home.xhtml?faces-redirect=true"
+                    />
                 <p:submenu label="Armazem">
                     <p:menuitem 
                         value="Entrada de productos" 
@@ -109,21 +109,21 @@
                 <p:submenu label="Acções">
                     <p:menuitem
                         value="Carregar Portfolio"
-                        actionListener="#{accoesBean.see()}"
+                        actionListener="#{accoesBean.carregarProductoPortfolio()}"
                         />
                     <p:menuitem
-                        value="Mensais"
-                        action="balancetes_mensais.xhtml?faces-redirect=true"
-                        />
-                    <p:menuitem
-                        value="Intervalo de Tempo"
-                        action="balancetes_intervalo_tempo.xhtml?faces-redirect=true"
-                        />
-                    <p:menuitem
-                        value="Tipo productos"
-                        action="balancetes_tipo_productos.xhtml?faces-redirect=true"
+                        value="Carregar Localidade"
+                        actionListener="#{accoesBean.carregarLocalidade()}"
                         />
                 </p:submenu>
+                <p:menuitem
+                    value="Logout"
+                    action="#{authBean.logout()}"
+                    />
+                <p:menuitem
+                    value="Carrinho: #{montraCarrinhoTrackBean.quantItensCarrinho()}"
+                    id="carrinho_quant"
+                    />
             </p:menubar>
         </h:form>
         <f:facet name="options">

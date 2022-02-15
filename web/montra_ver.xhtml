@@ -14,15 +14,23 @@
                 <h1>Montra da Loja</h1>
 
                 <div style="width: 100vw; display: flex; flex-wrap: wrap">
-                    <div style="width: 25%">
-                        <h:form>
-                            <p:graphicImage value="/resources/images/pexels-mike-112460.jpg" width="275px" style="display: inline-block" />
-                            <h4>Mercedes Alguma coisa</h4>
-                            <h3>Preço: <b>10.000.000</b></h3>
-                            <p:commandButton style="background-color: #036fab; color: white;" value="Adicionar ao Carrinho"/>
-                        </h:form>
+                    <ui:repeat value="#{verMontraBean.productosInMontra}" var="productoMontra">
+                        <div style="width: 25%">
 
-                    </div>
+                            <h:form>
+                                <p:graphicImage value="/resources/images/#{productoMontra.fkProducto.urlImagem}" width="275px" style="display: inline-block" />
+                                <h4>#{productoMontra.fkProducto.fkStock.fkPortfolio.designacao}</h4>
+                                <h3>Preço: <b>#{verMontraBean.getProductoPrice(productoMontra.fkProducto.pkVeiculo)}</b></h3>
+                                <p:commandButton 
+                                    actionListener="#{montraCarrinhoTrackBean.adicionarVeiculoCarrinho(productoMontra.fkProducto.pkVeiculo)}"
+                                    style="background-color: #036fab; color: white;" 
+                                    value="Adicionar ao Carrinho"
+                                    >
+                                </p:commandButton>
+                            </h:form>
+                        </div>
+                    </ui:repeat>
+
                 </div>
             </ui:define>
         </ui:composition>

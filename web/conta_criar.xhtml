@@ -15,50 +15,94 @@
 
                 <h:form>
                     <p:panelGrid columns="2">
-                        <p:outputLabel value="Nome: "/>
-                        <p:inputText/>
+                        <p:outputLabel value="Nome: " />
+                        <p:inputText value="#{criarContaBean.pessoa.nome}"/>
                         <p:outputLabel value="Sexo: "/>
-                        <p:selectOneRadio>
-                            <f:selectItem itemLabel="Masculino" itemValue="m"/>
-                            <f:selectItem itemLabel="Femenino" itemValue="f"/>
+                        <p:selectOneRadio value="#{criarContaBean.pessoa.fkSexo.pkSexo}">
+                            <f:selectItems
+                                value="#{sexoCache.listaSexo}"
+                                var="sexo"
+                                itemLabel="#{sexo.designacao.toLowerCase() == 'm' ? 'Masculino' : 'Femenino'}" 
+                                itemValue="#{sexo.pkSexo}"/>
                         </p:selectOneRadio>
                         <p:outputLabel value="Data Nascimento: "/>
-                        <p:calendar navigator="true"/>
+                        <p:calendar navigator="true" value="#{criarContaBean.pessoa.dataNasc}"/>
                         <p:outputLabel value="Username: "/>
-                        <p:inputText/>
+                        <p:inputText value="#{criarContaBean.conta.username}"/>
                         <p:outputLabel value="Password: "/>
-                        <p:inputText/>
-                        <p:outputLabel value="Email"/>
-                        <p:inputText/>
+                        <p:inputText value="#{criarContaBean.conta.password}"/>
+                        <p:outputLabel value="Email" />
+                        <p:inputText value="#{criarContaBean.conta.email}"/>
+                        <p:outputLabel value="Tipo Conta"/>
+                        <p:selectOneMenu value="#{criarContaBean.conta.fkTipoConta.pkTipoConta}">
+                            <f:selectItems
+                                value="#{tipoContaCache.listaTipoConta}"
+                                var="tipoConta"
+                                itemLabel="#{tipoConta.designacao}" 
+                                itemValue="#{tipoConta.pkTipoConta}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="Endereço"/>
 
-                        <p:panelGrid columns="3">
-                            <p:selectOneMenu value="" required="true">
-                                <f:selectItem  
-                                    itemLabel="Pais" 
-                                    itemValue="Angola"/>
+                        <p:panelGrid columns="4">
+                            <p:selectOneMenu value="#{criarContaBean.pkPais}">
+                                <f:selectItems
+                                    value="#{localidadeCache.paisLista}"
+                                    var="localidade" 
+                                    itemLabel="#{localidade.designacao}" 
+                                    itemValue="#{localidade.pkLocalidade}"
+                                    />
+                                <p:ajax 
+                                    listener="#{criarContaBean.updateProvinciaNascimentoList()}"
+                                    update="provincia_som municipio_som bairro_som"
+                                    />
+                            </p:selectOneMenu>
+                            
+                            <p:selectOneMenu id="provincia_som" value="#{criarContaBean.pkProvincia}">
+                                <f:selectItems
+                                    value="#{criarContaBean.provinciasList}"
+                                    var="localidade" 
+                                    itemLabel="#{localidade.designacao}" 
+                                    itemValue="#{localidade.pkLocalidade}"
+                                    />
+                                <p:ajax 
+                                    listener="#{criarContaBean.updateMunicipioNascimentoList()}"
+                                    update="municipio_som bairro_som"
+                                    />
                             </p:selectOneMenu>
 
-                            <p:selectOneMenu value="" required="true">
-                                <f:selectItem  
-                                    itemLabel="Provincia" 
-                                    itemValue="Luanda"/>
+                            <p:selectOneMenu  id="municipio_som" value="#{criarContaBean.pkMunicipio}">
+                                <f:selectItems
+                                    value="#{criarContaBean.municipiosList}"
+                                    var="localidade" 
+                                    itemLabel="#{localidade.designacao}" 
+                                    itemValue="#{localidade.pkLocalidade}"
+                                    />
+                                <p:ajax 
+                                    listener="#{criarContaBean.updateBairroNascimentoList()}"
+                                    update="bairro_som"
+                                    />
                             </p:selectOneMenu>
-
-                            <p:selectOneMenu value="" required="true">
-                                <f:selectItem  
-                                    itemLabel="Municipio" 
-                                    itemValue="Luanda"/>
+                            
+                            <p:selectOneMenu id="bairro_som" value="#{criarContaBean.endereco.fkLocalidade.pkLocalidade}" >
+                                <f:selectItems
+                                    value="#{criarContaBean.bairroList}"
+                                    var="localidade" 
+                                    itemLabel="#{localidade.designacao}" 
+                                    itemValue="#{localidade.pkLocalidade}"
+                                    />
+                                <p:ajax 
+                                    listener="#{criarContaBean.updateBairroNascimentoList()}"
+                                    />
                             </p:selectOneMenu>
                         </p:panelGrid>
 
                         <p:panelGrid columns="3">
                             <p:commandButton 
-                                actionListener="#{armazemEntradaBean.salvar()}" 
+                                actionListener="#{criarContaBean.salvar()}" 
                                 value="Salvar"
                                 />
                             <p:commandButton 
-                                actionListener="#{armazemEntradaBean.limpar()}" 
+                                actionListener="#{criarContaBean.limpar()}" 
                                 value="Limpar" 
                                 />
                             <p:commandButton 

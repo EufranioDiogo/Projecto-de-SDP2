@@ -16,22 +16,25 @@
                     <div>
                         <h:form>
                             <p:panelGrid columns="2">
-                                <h:outputLabel value="Producto a adicionar: "/>
-                                <h:selectOneMenu value="#{armazemPrecoBean.precario.fkStock.pkStock}" required="true">
-                                    <f:selectItems 
-                                        value="#{armazemPrecoBean.listaProductosStock}"
-                                        var="armazemProducto" 
-                                        itemLabel="#{armazemProducto.fkPortfolio.designacao}" 
-                                        itemValue="#{armazemProducto.pkStock}"/>
-                                </h:selectOneMenu>
+                                <p:panelGrid columns="5">
+
+                                    <h:outputLabel value="Producto a adicionar: "/>
+                                    <p:selectOneMenu id="tipo_update" value="#{armazemPrecoBean.productId}" required="true">
+                                        <f:selectItems 
+                                            value="#{armazemPrecoBean.listProductosPortfolio}"
+                                            var="portfolioProduct" 
+                                            itemLabel="#{portfolioProduct.fkStock.fkPortfolio.designacao}" 
+                                            itemValue="#{portfolioProduct.pkVeiculo}"/>
+                                        <p:ajax 
+                                            listener="#{armazemPrecoBean.updateQuantList()}"
+                                            update="valor_compra_input"
+                                            />
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+                                <h:outputLabel value=""/>
 
                                 <h:outputLabel value="Valor do Veiculo: "/>
-                                <h:inputText value="#{armazemPrecoBean.precario.valorCompra}" required="true"/>
-
-
-                                <h:outputLabel value="Data de Compra: "/>
-                                <p:calendar value="#{armazemPrecoBean.precario.dataCompra}"  navigator="true" required="true"/>
-
+                                <h:inputText id="valor_compra_input" value="#{armazemPrecoBean.precarioElement.valorCompra}" required="true"/>
 
 
                                 <p:panelGrid columns="3">
@@ -60,25 +63,14 @@
 
         </ui:composition>
 
-        <ui:composition template="template.xhtml">
-            <ui:define name="conteudo">
-                <p:dataTable  id="dt" value="#{armazemRupturaBean.listaProductosPreRupturaStock}" var="stockElement">
-                    <f:facet name="header">
-                        <h:outputText value="Dados productos pre-ruptura em Stock" />
-                    </f:facet>
-
-                    <p:column headerText="Nome">       
-                        <p:outputLabel value="#{stockElement.fkPortfolio.designacao}"/>
-                    </p:column>
-                    <p:column headerText="Quantidade Actual Stock">   
-                        <p:outputLabel value="#{stockElement.quantVeiculoActual}"/>
-                    </p:column>
-                    <p:column headerText="Quantidade Máxima Stock">    
-                        <p:outputLabel value="#{stockElement.quantProductoMaxima}"/>
-                    </p:column>
-                </p:dataTable>
-            </ui:define>
-        </ui:composition>
     </h:body>
 </html>
 
+<!--<h:outputLabel value="Producto a adicionar: "/>
+                                <h:selectOneMenu value="#{armazemPrecoBean.precario.fkStock.pkStock}" required="true">
+                                    <f:selectItems 
+                                        value="#{armazemPrecoBean.listProductosPortfolio}"
+                                        var="armazemProducto" 
+                                        itemLabel="#{armazemProducto.fkPortfolio.designacao}" 
+                                        itemValue="#{armazemProducto.pkStock}"/>
+                                </h:selectOneMenu>-->

@@ -6,6 +6,7 @@
 package ejbs.facades;
 
 import ejbs.entities.Pessoa;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,10 @@ public class PessoaFacade extends AbstractFacade<Pessoa> {
 
     public PessoaFacade() {
         super(Pessoa.class);
+    }
+    
+    public List<Pessoa> findLastPessoa() {
+        return em.createQuery("SELECT p FROM Pessoa p ORDER BY  p.pkPessoa DESC").getResultList();
     }
     
 }

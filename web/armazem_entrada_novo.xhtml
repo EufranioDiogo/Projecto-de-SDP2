@@ -11,23 +11,64 @@
                 <div>
                     <h1>Entrada de Productos Armazem</h1>
                     <div>
-                        <h:form>
+                        <h:form enctype="multipart/form-data">
+
                             <p:panelGrid columns="2">
-                                <h:outputLabel value="Producto a adicionar: "/>
-                                <p:selectOneMenu value="#{armazemEntradaBean.automovelSelecionado}" required="true">
-                                    <f:selectItems 
-                                        value="#{armazemEntradaBean.listProductosPortfolio}"
-                                        var="portfolioProduct" 
-                                        itemLabel="#{portfolioProduct.designacao}" 
-                                        itemValue="#{portfolioProduct.pkPortfolio}"/>
-                                </p:selectOneMenu>
+                                <h:outputLabel value="Tipo Producto: "/>
+                                <p:panelGrid columns="5">
+                                    <p:selectOneMenu value="#{armazemEntradaBean.portfolioElementTipo.pkPortfolio}" required="true">
+                                        <f:selectItems 
+                                            value="#{armazemEntradaBean.listTipoProductos}"
+                                            var="portfolioTipoProduct" 
+                                            itemLabel="#{portfolioTipoProduct.designacao}" 
+                                            itemValue="#{portfolioTipoProduct.pkPortfolio}"/>
+
+
+                                        <p:ajax 
+                                            listener="#{armazemEntradaBean.updateModeloList()}"
+                                            update="modelo_update tipo_update product_actual_quant_input product_max_quant_input"
+                                            />
+                                    </p:selectOneMenu>
+
+                                    <h:outputLabel value="Modelo: "/>
+                                    <p:selectOneMenu id="modelo_update" value="#{armazemEntradaBean.portfolioElementModelo.pkPortfolio}" required="true">
+                                        <f:selectItems 
+                                            value="#{armazemEntradaBean.listModeloProductos}"
+                                            var="portfolioProductModelo" 
+                                            itemLabel="#{portfolioProductModelo.designacao}" 
+                                            itemValue="#{portfolioProductModelo.pkPortfolio}"/>
+                                        <p:ajax 
+                                            listener="#{armazemEntradaBean.updateProductsList()}"
+                                            update="tipo_update product_actual_quant_input product_max_quant_input"
+                                            />
+                                    </p:selectOneMenu>
+
+                                    <h:outputLabel value="Producto a adicionar: "/>
+                                    <p:selectOneMenu id="tipo_update" value="#{armazemEntradaBean.portfolioElementAutomovel.pkPortfolio}" required="true">
+                                        <f:selectItems 
+                                            value="#{armazemEntradaBean.listProductosPortfolio}"
+                                            var="portfolioProduct" 
+                                            itemLabel="#{portfolioProduct.designacao}" 
+                                            itemValue="#{portfolioProduct.pkPortfolio}"/>
+                                        <p:ajax 
+                                            listener="#{armazemEntradaBean.updateQuantList()}"
+                                            update="product_actual_quant_input product_max_quant_input"
+                                            />
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+
 
                                 <h:outputLabel value="Quantidade de Veiculos: "/>
-                                <h:inputText value="#{armazemEntradaBean.quantAutomoveis}" required="true"/>
+                                <p:inputText id="product_actual_quant_input" value="#{armazemEntradaBean.elementoStock.quantVeiculoActual}" required="true"/>
 
                                 <h:outputLabel value="Quantidade máxima de Veiculos "/>
-                                <h:inputText value="#{armazemEntradaBean.quantMaximaAutomoveis}" required="true"/>
+                                <p:inputText id="product_max_quant_input" value="#{armazemEntradaBean.elementoStock.quantProductoMaxima}" required="true"/>
 
+                                <h:outputLabel value="URL Da Imagem "/>
+                                <p:fileUpload mode="advanced" multiple="false" fileUploadListener="#{armazemEntradaBean.handleFileUpload}" />
+                                
+                                <h:outputLabel value="Descrição"/>
+                                <p:inputText id="input_descricao" value="#{armazemEntradaBean.veiculoElement.descricao}"/>
 
                                 <p:panelGrid columns="3">
                                     <p:commandButton 

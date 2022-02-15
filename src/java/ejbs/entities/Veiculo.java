@@ -6,9 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,12 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -48,32 +43,21 @@ public class Veiculo implements Serializable {
     @Size(max = 250)
     @Column(name = "url_imagem", length = 250)
     private String urlImagem;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    @Column(nullable = false, length = 200)
+    @Size(max = 200)
+    @Column(length = 200)
     private String descricao;
-    @JoinColumn(name = "fk_portfolio", referencedColumnName = "pk_portfolio", nullable = false)
+    @JoinColumn(name = "fk_tipo_veiculo", referencedColumnName = "pk_portfolio", nullable = false)
     @ManyToOne(optional = false)
-    private Portfolio fkPortfolio;
-    @JoinColumn(name = "fk_tipo_veiculo", referencedColumnName = "pk_tipo_veiculo", nullable = false)
+    private Portfolio fkTipoVeiculo;
+    @JoinColumn(name = "fk_stock", referencedColumnName = "pk_stock", nullable = false)
     @ManyToOne(optional = false)
-    private TipoVeiculo fkTipoVeiculo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculo")
-    private List<Compra> compraList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkProducto")
-    private List<Montra> montraList;
+    private Stock fkStock;
 
     public Veiculo() {
     }
 
     public Veiculo(Integer pkVeiculo) {
         this.pkVeiculo = pkVeiculo;
-    }
-
-    public Veiculo(Integer pkVeiculo, String descricao) {
-        this.pkVeiculo = pkVeiculo;
-        this.descricao = descricao;
     }
 
     public Integer getPkVeiculo() {
@@ -100,38 +84,20 @@ public class Veiculo implements Serializable {
         this.descricao = descricao;
     }
 
-    public Portfolio getFkPortfolio() {
-        return fkPortfolio;
-    }
-
-    public void setFkPortfolio(Portfolio fkPortfolio) {
-        this.fkPortfolio = fkPortfolio;
-    }
-
-    public TipoVeiculo getFkTipoVeiculo() {
+    public Portfolio getFkTipoVeiculo() {
         return fkTipoVeiculo;
     }
 
-    public void setFkTipoVeiculo(TipoVeiculo fkTipoVeiculo) {
+    public void setFkTipoVeiculo(Portfolio fkTipoVeiculo) {
         this.fkTipoVeiculo = fkTipoVeiculo;
     }
 
-    @XmlTransient
-    public List<Compra> getCompraList() {
-        return compraList;
+    public Stock getFkStock() {
+        return fkStock;
     }
 
-    public void setCompraList(List<Compra> compraList) {
-        this.compraList = compraList;
-    }
-
-    @XmlTransient
-    public List<Montra> getMontraList() {
-        return montraList;
-    }
-
-    public void setMontraList(List<Montra> montraList) {
-        this.montraList = montraList;
+    public void setFkStock(Stock fkStock) {
+        this.fkStock = fkStock;
     }
 
     @Override

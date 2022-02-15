@@ -5,11 +5,13 @@
  */
 package ejbs.facades;
 
+import ejbs.entities.Portfolio;
 import ejbs.entities.Stock;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -40,5 +42,15 @@ public class StockFacade extends AbstractFacade<Stock> {
     
     public List<Stock> findAllPreRuptura() {
         return em.createQuery("SELECT s FROM Stock s WHERE s.quantVeiculoActual <= ((s.quantProductoMaxima * 50) / 100)").getResultList();
+    }
+    
+    public List<Stock> findProdutosStockFromFKPortfolio(String portifolioFK)
+    {
+        Query query = em.createQuery("SELECT s FROM Stock s WHERE s.fkPortfolio.pkPortfolio = :portifolio");
+        
+        query.setParameter("portifolio", portifolioFK);
+        
+        
+        return query.getResultList();
     }
 }

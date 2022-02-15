@@ -48,7 +48,7 @@ public class Stock implements Serializable {
     @Column(name = "quant_producto_maxima")
     private Integer quantProductoMaxima;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkStock")
-    private List<Precario> precarioList;
+    private List<Veiculo> veiculoList;
     @JoinColumn(name = "fk_portfolio", referencedColumnName = "pk_portfolio")
     @ManyToOne
     private Portfolio fkPortfolio;
@@ -85,12 +85,12 @@ public class Stock implements Serializable {
     }
 
     @XmlTransient
-    public List<Precario> getPrecarioList() {
-        return precarioList;
+    public List<Veiculo> getVeiculoList() {
+        return veiculoList;
     }
 
-    public void setPrecarioList(List<Precario> precarioList) {
-        this.precarioList = precarioList;
+    public void setVeiculoList(List<Veiculo> veiculoList) {
+        this.veiculoList = veiculoList;
     }
 
     public Portfolio getFkPortfolio() {

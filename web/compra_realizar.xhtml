@@ -13,6 +13,23 @@
             <ui:define name="conteudo">
                 <div style="width: 100vw; display: flex; flex-direction: column; margin-left: 0;">
                     <h:form>
+                        <ui:repeat value="#{compraBean.productosParaSerComprados}" var="producto">
+                            <div style="width: 90%; display: flex; flex-wrap: wrap; margin: 50px 0;">
+                                <p:graphicImage value="/resources/images/#{producto.fkProducto.urlImagem}"  style="display: inline-block; width: 35%;" />
+
+                                <div style="display: flex; flex-direction: column; justify-content: space-between; margin-left: 20px; ">
+                                    <div>
+                                        <h1 style="margin: 5px 0; text-align: left;">#{producto.fkProducto.fkStock.fkPortfolio.designacao}</h1>
+                                        <h3 style="margin: 5px 0; text-align: left;">Preço: <b>#{verMontraBean.getProductoPrice(productoMontra.fkProducto.pkVeiculo)}</b></h3>
+                                    </div>
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="Quantidade: "/>
+                                        <p:inputText value=""/>
+                                    </p:panelGrid>
+                                </div>
+                            </div>
+                        </ui:repeat>
+
                         <div style="width: 90%; display: flex; flex-wrap: wrap; margin: 50px 0;">
                             <p:graphicImage value="/resources/images/pexels-mike-112460.jpg"  style="display: inline-block; width: 35%;" />
 
@@ -27,23 +44,8 @@
                                 </p:panelGrid>
                             </div>
                         </div>
-                        
-                        <div style="width: 90%; display: flex; flex-wrap: wrap; margin: 50px 0;">
-                            <p:graphicImage value="/resources/images/pexels-mike-112460.jpg"  style="display: inline-block; width: 35%;" />
 
-                            <div style="display: flex; flex-direction: column; justify-content: space-between; margin-left: 20px; ">
-                                <div>
-                                    <h1 style="margin: 5px 0; text-align: left;">Mercedes Alguma coisa</h1>
-                                    <h3 style="margin: 5px 0; text-align: left;">Preço: <b>10.000.000</b></h3>
-                                </div>
-                                <p:panelGrid columns="2">
-                                    <p:outputLabel value="Quantidade: "/>
-                                    <p:inputText />
-                                </p:panelGrid>
-                            </div>
-                        </div>
-                        
-                        
+
 
                         <p:panelGrid columns="3" style="">
                             <p:commandButton value="Efectuar Comprar"/>

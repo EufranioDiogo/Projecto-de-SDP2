@@ -6,9 +6,11 @@
 package ejbs.facades;
 
 import ejbs.entities.Conta;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,14 @@ public class ContaFacade extends AbstractFacade<Conta> {
 
     public ContaFacade() {
         super(Conta.class);
+    }
+    
+    public List<Conta> findAccount(String username, String password) {
+        Query query = em.createQuery("SELECT c FROM Conta c WHERE c.username = :username AND c.password = :password");
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+        
+        return query.getResultList();
     }
     
 }

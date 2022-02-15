@@ -6,9 +6,12 @@
 package ejbs.facades;
 
 import ejbs.entities.Montra;
+import ejbs.entities.Veiculo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +30,12 @@ public class MontraFacade extends AbstractFacade<Montra> {
 
     public MontraFacade() {
         super(Montra.class);
+    }
+    
+    public List<Veiculo> findAllProductsNotInMontra() {
+        Query query = em.createQuery("SELECT v FROM Veiculo v WHERE v.pkVeiculo NOT IN (SELECT m.fkProducto.pkVeiculo FROM Montra m)");
+        
+        return query.getResultList();
     }
     
 }

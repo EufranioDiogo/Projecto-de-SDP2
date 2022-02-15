@@ -12,34 +12,34 @@
         <ui:composition template="template.xhtml">
             <ui:define name="conteudo">
                 <h2>Usuários Cadastrados</h2>
-                    <p:dataTable  id="dt" value="#{armazemConsultarBean.listaProductosStock}" var="stockElement">
-                        <f:facet name="header">
-                            <h:outputText value="" />
-                        </f:facet>
+                <p:dataTable  id="dt" value="#{verContasBean.listaConta}" var="contaElement">
+                    <f:facet name="header">
+                        <h:outputText value="Contas" />
+                    </f:facet>
 
-                        <p:column headerText="Nome">       
-                            <p:outputLabel value=""/>
-                        </p:column>
-                        <p:column headerText="Data Nascimento">   
-                            <p:outputLabel value=""/>
-                        </p:column>
-                        <p:column headerText="Sexo">    
-                            <p:outputLabel value=""/>
-                        </p:column>
-                        <p:column headerText="Username">    
-                            <p:outputLabel value=""/>
-                        </p:column>
-                        <p:column headerText="Email">    
-                            <p:outputLabel value=""/>
-                        </p:column>
+                    <p:column headerText="Nome">       
+                        <p:outputLabel value="#{contaElement.fkPessoa.nome}"/>
+                    </p:column>
+                    <p:column headerText="Data Nascimento">   
+                        <p:outputLabel value="#{contaElement.fkPessoa.dataNasc}"/>
+                    </p:column>
+                    <p:column headerText="Sexo">    
+                        <p:outputLabel value="#{contaElement.fkPessoa.fkSexo.designacao}"/>
+                    </p:column>
+                    <p:column headerText="Username">    
+                        <p:outputLabel value="#{contaElement.username}"/>
+                    </p:column>
+                    <p:column headerText="Email">    
+                        <p:outputLabel value="#{contaElement.email}"/>
+                    </p:column>
 
-                        <p:column headerText="Acções">
-                            <h:form>
-                                <p:commandButton value="Actualizar"/>
-                                <p:commandButton value="Remover"/>    
-                            </h:form>
-                        </p:column>
-                    </p:dataTable>
+                    <p:column headerText="Acções">
+                        <h:form>
+                            <p:commandButton value="Actualizar" actionListener="#{verContasBean.actualizar(contaElement.pkConta)}"/>
+                            <p:commandButton value="Remover" actionListener="#{verContasBean.deletar(contaElement.pkConta)}"/>    
+                        </h:form>
+                    </p:column>
+                </p:dataTable>
             </ui:define>
         </ui:composition>
     </h:body>

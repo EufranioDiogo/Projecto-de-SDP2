@@ -16,20 +16,20 @@
                     <h:form>
                         <p:panelGrid columns="2">
                             <h:outputLabel value="Producto a adicionar: "/>
-                            <p:selectManyMenu value="#{armazemEntradaBean.automovelSelecionado}" required="true">
+                            <p:selectManyMenu value="#{montraEntradaBean.montraSelectedItemsToInsert}" required="true">
                                 <f:selectItems 
-                                    value="#{armazemEntradaBean.listProductosPortfolio}"
-                                    var="portfolioProduct" 
-                                    itemLabel="#{portfolioProduct.designacao}" 
-                                    itemValue="#{portfolioProduct.pkPortfolio}"/>
+                                    value="#{montraEntradaBean.productNotInMontra}"
+                                    var="notInMontraProduct" 
+                                    itemLabel="#{notInMontraProduct.fkStock.fkPortfolio.designacao}" 
+                                    itemValue="#{notInMontraProduct.pkVeiculo}"/>
                             </p:selectManyMenu>
                             <p:panelGrid columns="3">
                                 <p:commandButton 
-                                    actionListener="#{armazemEntradaBean.salvar()}" 
+                                    actionListener="#{montraEntradaBean.salvar()}" 
                                     value="Salvar"
                                     />
                                 <p:commandButton 
-                                    actionListener="#{armazemEntradaBean.limpar()}" 
+                                    actionListener="#{montraEntradaBean.limpar()}" 
                                     value="Limpar" 
                                     />
                                 <p:commandButton 
@@ -43,36 +43,33 @@
                     </h:form>
 
                     <h2>Productos dentro de montra</h2>
-                    <p:dataTable  id="dt" value="#{armazemConsultarBean.listaProductosStock}" var="stockElement">
+
+
+                    <p:dataTable  id="dt" value="#{montraEntradaBean.productOnMontra}" var="montraElement">
                         <f:facet name="header">
-                            <h:outputText value="" />
+                            <h:outputText value="Dados productos em Montra" />
                         </f:facet>
 
-                        <p:column headerText="Nome">       
-                            <p:outputLabel value="#{stockElement.fkPortfolio.designacao}"/>
+                        <p:column headerText="Nome Producto">       
+                            <p:outputLabel value="#{montraElement.fkProducto.fkStock.fkPortfolio.designacao}"/>
                         </p:column>
                         <p:column headerText="Quantidade Actual Stock">   
-                            <p:outputLabel value="#{stockElement.quantVeiculoActual}"/>
+                            <p:outputLabel value="#{montraElement.fkProducto.fkStock.quantVeiculoActual}"/>
                         </p:column>
-                        <p:column headerText="Quantidade Máxima Stock">    
-                            <p:outputLabel value="#{stockElement.quantProductoMaxima}"/>
-                        </p:column>
-                        <p:column headerText="Preço">    
-                            <p:outputLabel value="1.000.000"/>
-                        </p:column>
-
-                        <p:column headerText="Data de inserção">    
-                            <p:outputLabel value="01/01/2021"/>
-                        </p:column>
-
-                        <p:column headerText="Acções">
+                        <p:column headerText="Acções"> 
                             <h:form>
-                                <p:commandButton value="Adicionar"/>
-                                <p:commandButton value="Remover"/>    
+                                <p:commandButton value="Eliminar" >
+                                    <p:ajax listener="#{montraEntradaBean.delete(montraElement.pkMontra)}" update="dt"/>
+                                </p:commandButton>
                             </h:form>
                         </p:column>
                     </p:dataTable>
                 </div>
+
+
+
+
+
             </ui:define>
         </ui:composition>
     </h:body>

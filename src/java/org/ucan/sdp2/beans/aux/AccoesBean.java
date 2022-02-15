@@ -50,9 +50,17 @@ public class AccoesBean implements Serializable {
     public AccoesBean() {
     }
 
+    public void carregarLocalidade() {
+        try {
+            loadPortfolio("Portfolio_EufranioDiogo_SDP2.xls");
+            this.connectToDatabase();
+            startupLocalidadeConfig();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+    }
     
     public void see() {
-        System.out.println("Entrou");
         try {
             loadPortfolio("Portfolio_EufranioDiogo_SDP2.xls");
         } catch (Exception e) {
@@ -63,10 +71,15 @@ public class AccoesBean implements Serializable {
     
     public void loadPortfolio(String portfolioName) {
         this.PORTFOLIO_NAME = this.getClass().getResource(portfolioName).getFile();
+    }
+    
+    public void  carregarProductoPortfolio() {
         try {
+            loadPortfolio("Portfolio_EufranioDiogo_SDP2.xls");
             this.connectToDatabase();
+            startupProductoPortfolioConfig();
         } catch (Exception e) {
-            Logger.getLogger(AccoesBean.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println(e.getStackTrace());
         }
     }
     
@@ -74,7 +87,7 @@ public class AccoesBean implements Serializable {
         try {
             connection = DriverManager.getConnection(DB_URI, USER_NAME, USER_PASSWORD);
             if (connection != null) {
-                startupConfig();
+                
             } else {
                 goToErroPage();
             }
@@ -82,13 +95,15 @@ public class AccoesBean implements Serializable {
             Logger.getLogger(AccoesBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void startupConfig() {
+    public void startupProductoPortfolioConfig() {
         try {
             String query = "TRUNCATE TABLE portfolio CASCADE";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.executeUpdate();
             try {
-                setupPortfolio();
+                setupPortfolio("productos", 
+                        "INSERT INTO portfolio(pk_portfolio, designacao) VALUES(?, ?);", 
+                        "INSERT INTO portfolio(pk_portfolio, designacao, fk_portfolio) VALUES(?, ?, ?);");
             } catch (Exception e) {
             }
         } catch (SQLException ex) {
@@ -103,7 +118,7 @@ public class AccoesBean implements Serializable {
             connection = DriverManager.getConnection(DB_URI, USER_NAME, USER_PASSWORD);
             if (connection != null) {
                 System.out.println("Connexão estabelecida");
-                startupConfig();
+                startupProductoPortfolioConfig();
             } else {
                 goToErroPage();
             }
@@ -113,7 +128,7 @@ public class AccoesBean implements Serializable {
 
     }
 
-    public void setupPortfolio() {
+    public void setupPortfolio(String sheetName, String primaryQuery, String secundaryQuery) {
         File file = new File(PORTFOLIO_NAME);
         
         try {
@@ -139,7 +154,7 @@ public class AccoesBean implements Serializable {
         }
         objDefaultFormat = new DataFormatter();
         objFormulaEvaluator = new HSSFFormulaEvaluator((HSSFWorkbook) workbook);
-        HSSFSheet workSheet = workbook.getSheetAt(0);
+        HSSFSheet workSheet = workbook.getSheet(sheetName);
         HSSFRow row;
         Iterator<Row> rowIterator = workSheet.iterator();
         String previousItem = "";
@@ -173,7 +188,7 @@ public class AccoesBean implements Serializable {
                 actualFatherIndex = -1;
                 previousItem = actualItem;
                 //System.out.println(previousItem);
-                String query = "INSERT INTO portfolio(pk_portfolio, designacao) VALUES(?, ?);";
+                String query = primaryQuery;
                 try {
                     PreparedStatement statement = connection.prepareStatement(query);
                     statement.setString(1, actualItem);
@@ -193,7 +208,7 @@ public class AccoesBean implements Serializable {
                     int quantStepsBack = previousSize - actualSize;
                     actualFatherIndex -= quantStepsBack;
                 }
-                String query = "INSERT INTO portfolio(pk_portfolio, designacao, fk_portfolio) VALUES(?, ?, ?);";
+                String query = secundaryQuery;
                 try {
                     PreparedStatement statement = connection.prepareStatement(query);
                     statement.setString(1, actualItem);
@@ -228,6 +243,22 @@ public class AccoesBean implements Serializable {
             }
         }
         return quant;
+    }
+
+    private void startupLocalidadeConfig() {
+        try {
+            String query = "TRUNCATE TABLE localidade CASCADE";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.executeUpdate();
+            try {
+                setupPortfolio("localidade", 
+                        "INSERT INTO localidade(pk_localidade, designacao) VALUES(?, ?);", 
+                        "INSERT INTO localidade(pk_localidade, designacao, fk_localidade) VALUES(?, ?, ?);");
+            } catch (Exception e) {
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccoesBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

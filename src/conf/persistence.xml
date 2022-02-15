@@ -4,9 +4,7 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>ejbs.entities.Provincia</class>
     <class>ejbs.entities.BilheteIdentidade</class>
-    <class>ejbs.entities.Localidade</class>
     <class>ejbs.entities.Conta</class>
-    <class>ejbs.entities.Veiculo</class>
     <class>ejbs.entities.TipoConta</class>
     <class>ejbs.entities.Pessoa</class>
     <class>ejbs.entities.Montra</class>
@@ -17,7 +15,9 @@
     <class>ejbs.entities.Stock</class>
     <class>ejbs.entities.TipoVeiculo</class>
     <class>ejbs.entities.Compra</class>
+    <class>ejbs.entities.Localidade</class>
     <class>ejbs.entities.Precario</class>
+    <class>ejbs.entities.Veiculo</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <jta-data-source>java:/UcanDS</jta-data-source>
   </persistence-unit>

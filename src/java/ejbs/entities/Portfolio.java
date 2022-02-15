@@ -50,7 +50,7 @@ public class Portfolio implements Serializable {
     @Size(max = 200)
     @Column(name = "fk_portfolio", length = 200)
     private String fkPortfolio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPortfolio")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkTipoVeiculo")
     private List<Veiculo> veiculoList;
     @OneToMany(mappedBy = "fkPortfolio")
     private List<Stock> stockList;
